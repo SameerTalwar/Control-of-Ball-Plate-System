@@ -7,7 +7,7 @@ m = 0.05;
 g=9.80;
 
 %%
-
+%ball plate system
 simspan=linspace(0,50,1000);% simulation span
 tstep=50/1000;% timestep
 xerrorint = 0;
