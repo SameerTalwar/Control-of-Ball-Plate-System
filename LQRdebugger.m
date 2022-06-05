@@ -23,11 +23,11 @@ C = [1 0 0 0 0 0 0 0; 0 0 0 0 1 0 0 0];
 
 D = [0 0 ; 0 0];
 
-Q = [100 0 0 0 0 0 0 0;
+Q = [1 0 0 0 0 0 0 0;
     0 1 0 0 0 0 0 0;
     0 0 1 0 0 0 0 0;
     0 0 0 1 0 0 0 0
-    0 0 0 0 100 0 0 0
+    0 0 0 0 1 0 0 0
     0 0 0 0 0 1 0 0
     0 0 0 0 0 0 1 0
     0 0 0 0 0 0 0 1];
@@ -62,7 +62,7 @@ set(gca,'FontSize',12);
 grid on;
 
 figure(3)
-plot(t,X(:,1),'--')
+plot(t,X(:,5),'--')
 title('Tracking error of system using LQR controller')
 xlabel('Time in secs')
 h_xlabel = get(gca,'XLabel');

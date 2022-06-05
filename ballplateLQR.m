@@ -1,10 +1,10 @@
-function deX = ballplateLQR(t,eX,errorX0)
+function [A,B,K] = ballplateLQR(errorX0)
 
-x = errorX0(1);
+x = 0;
 xdot = errorX0(2);
 alpha = errorX0(3);
 alphadot = errorX0(4);
-y = errorX0(5);
+y = 0;
 ydot = errorX0(6);
 beta = errorX0(7);
 betadot = errorX0(8);
@@ -104,20 +104,17 @@ B(7,2) = 0;
 B(8,1) = (-m*x*y)/((Ib+Ip)*c3);
 B(8,2) = (m*c1)/((Ib+Ip)*c3);
 
-Q = [100 0 0 0 0 0 0 0;
+Q = [1000000000 0 0 0 0 0 0 0;
     0 1 0 0 0 0 0 0;
     0 0 1 0 0 0 0 0;
     0 0 0 1 0 0 0 0
-    0 0 0 0 100 0 0 0
+    0 0 0 0 1000000000 0 0 0
     0 0 0 0 0 1 0 0
     0 0 0 0 0 0 1 0
     0 0 0 0 0 0 0 1];
 
-R = [0.01 0; 0 0.01];
+R = [0.001 0; 0 0.001];
 
-A = df_dx;
-
+A= df_dx;
 K = lqr(A,B,Q,R);
-
-deX = (A-(B*K))*eX;
 end
