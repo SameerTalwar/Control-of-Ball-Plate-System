@@ -14,8 +14,10 @@
 clear all
 clc
 
-desired = [0.01;0;0;0;0.02;0;0;0];
-[A,B] = JacobianEvaluatorBPS(desired);
+X0 = [0.09 0 0 0 0.05 0 0 0]';
+desired = [0.1;0;0;0;0.2;0;0;0];
+errorX0 = desired-X0;
+[A,B] = JacobianEvaluatorBPS(errorX0)
 
 C = [1 0 0 0 0 0 0 0; 0 0 0 0 1 0 0 0];
 
@@ -30,19 +32,23 @@ Q = [100 0 0 0 0 0 0 0;
     0 0 0 0 0 0 1 0
     0 0 0 0 0 0 0 1];
 
-R = [0.09 0; 0 0.05];
+R = [0.01 0; 0 0.01];
 
-K = lqr(A,B,Q,R)
+K = lqr(A,B,Q,R);
 
-sys = ss((A-B*K), B, C, D);
+%sys = ss((A-B*K), B, C, D);
 
-X0 = [0.09 0 0 0 0.05 0 0 0]';
 %t = linspace(0,3,0.5);
-t = [0: 0.01: 10];
-[Y, t, X] = initial(sys, X0, t);
+tspan = [0: 0.01: 10];
+%[Y, t, X] = initial(sys, X0, t);
+[t,eX] = ode45(@(t,eX) odeFUN(eX,A,B,K),tspan,errorX0);
+
+for n=1:length(t)
+    X(n,:) = (desired')-eX(n,:);
+end
 
 figure(1)
-plot(Y(:,1),Y(:,2))
+plot(X(:,1),X(:,5))
 hold on
 %axis('square');
 title('Trajectory plot')
@@ -56,7 +62,7 @@ set(gca,'FontSize',12);
 grid on;
 
 figure(3)
-plot(t,Y(:,1),'--')
+plot(t,X(:,1),'--')
 title('Tracking error of system using LQR controller')
 xlabel('Time in secs')
 h_xlabel = get(gca,'XLabel');
@@ -149,3 +155,7 @@ set(gca,'FontSize',12)
 % legend('Actual X trajectory','Desired X trajectory')
 grid on;
 %end
+
+function dXdt = odeFUN(X,A0,B0,K0)
+    dXdt = (A0-(B0*K0))*X;
+end
