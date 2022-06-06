@@ -47,7 +47,7 @@ set(h_ylabel,'FontSize',20);
 set(gca,'FontSize',12)
 % legend('Actual X trajectory','Desired X trajectory')
 grid on;
-
+x(:,1);
 figure(2)
 plot(x(:,1),x(:,3))
 hold on
@@ -64,7 +64,7 @@ set(gca,'FontSize',12)
 legend('Actual Trajectory','Desired Trajectory')
 grid on;
 figure(3)
-plot(t,rad2deg(uinstx),'--',t,rad2deg(uinsty))
+plot(t,(uinstx),'--',t,(uinsty))
 title('Plate Angles')
 legend('Motor X angle','Motor Y angle')
 xlabel('Time in seconds')
