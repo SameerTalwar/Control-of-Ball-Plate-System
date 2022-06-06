@@ -10,7 +10,7 @@ timestep=.1;
 simspan1=0:.1:2;
 simspan2=2.1:.1:20;
 simspan=[simspan1 simspan2];% Simulation Span
-init=[0;0;0;0];% Initial Condition
+X0 = [0 0 0 0 0 0 0 0];% Initial Condition
 amplitude=.04;% Radius of the circle
 
 % Designing desired trajectory
@@ -34,72 +34,53 @@ desireday=gradient(desiredvy)/timestep;
 desiredalphadotdot = gradient(desiredalphadot)/timestep;
 desiredbetadotdot = gradient(desiredbetadot)/timestep;
 
-desired=[desiredx;desiredvx;desiredalpha;desiredalphadot;desiredy;desiredvy;desiredbeta;desiredbetadot;desiredax;desireday;desiredalphadotdot;desiredbetadotdot];
+desired=[desiredx;desiredvx;desiredalpha;desiredalphadot;desiredy;desiredvy;desiredbeta;desiredbetadot;desiredax;desireday;desiredalphadotdot;desiredbetadotdot]';
 
-m = 0.05;
-r = 0.02;
-g = 9.8;
-M = 0.5;
-a = 0.2;
-Ib = 2*m*r*r/5;
-Ip = M*a*a/12;
-c1=1+(Ib/(m*r*r));
-c2 = m/(Ib+Ip);
+%%
+errorX0 = desired(2,1:8)-X0;
+indvtspan = [0:0.01:0.1];
+X=zeros(201,8);
 
-C1=g/c1;
-C2=g*c1;
-
-A=zeros(8,8,201);
-for n=1:201
-    A(:,:,n) = JacobianEvaluatorBPS(desired(:,n));
+for n=2:200
+    [A,B,K] = ballplateLQR(errorX0);
+    [t,eX] = ode45(@(t,eX) DiffEqLQR(t,eX,A,B,K),indvtspan,errorX0);
+    X(n,:) = desired(n,1:8) - eX(11,:);
+    errorX0 = desired(n+1,1:8) - X(n,:);
 end
-
-B = [0 0;
-    0 0; 
-    0 0;
-    c2/m 0;
-    0 0;
-    0 0;
-    0 0;
-    0 c2/m]; 
-
-C = [1 0 0 0 0 0 0 0; 0 0 0 0 1 0 0 0];
-
-D = [0 0 ; 0 0];
-
-Q = [100000 0 0 0 0 0 0 0;
-    0 1 0 0 0 0 0 0;
-    0 0 100 0 0 0 0 0;
-    0 0 0 1 0 0 0 0
-    0 0 0 0 100000 0 0 0
-    0 0 0 0 0 1 0 0
-    0 0 0 0 0 0 100 0
-    0 0 0 0 0 0 0 1];
-
-R = [0.001 0; 0 0.001];
-
-K=zeros(2,8,201);
-for n=1:201
-    K(:,:,n) = lqr(A(:,:,n),B,Q,R);
-end
-
 
 %%
 %Starting Simulation
+figure(1)
+plot(X(:,1),X(:,5))
+hold on
+plot(desiredx,desiredy)
+%axis('square');
+title('Trajectory plot')
+xlabel('X axis')
+h_xlabel = get(gca,'XLabel');
+set(h_xlabel,'FontSize',20);
+ylabel('Y axis')
+h_ylabel = get(gca,'XLabel');
+set(h_ylabel,'FontSize',20);
+set(gca,'FontSize',12);
+legend('Actual Trajectory','Desired Trajectory')
+grid on;
 
-A(:,:,21)
-K(:,:,21)
-X0 = zeros(201,8);
-sys = ss((A(:,:,21)-(B*K(:,:,21))),B,C,D);
-t = [0: 0.01: 1];
-[Y, t, X] = initial(sys, X0(1,:), t);
-plot(Y(:,1),Y(:,2))
-for n=1:201
-    sys = ss((A(:,:,n)-(B*K(:,:,n))),B,C,D);
-    t = [0: 0.01: 1];
-    [Y, t, X] = initial(sys, X0(n,:), t);
-    %X0(:,n+1) = X(end,:)'
-    %figure(2)
-    %hold on
-    %plot(X(end,1),X(end,5))
+figure(3)
+plot(simspan,X(:,5),'--',simspan,desiredy,'-.')
+title('Tracking error of system using LQR controller')
+xlabel('Time in secs')
+h_xlabel = get(gca,'XLabel');
+set(h_xlabel,'FontSize',20);
+ylabel('Distance in m')
+h_ylabel = get(gca,'YLabel');
+set(h_ylabel,'FontSize',20);
+set(gca,'FontSize',12)
+legend('Actual Y trajectory','Desired Y trajectory')
+grid on;
+
+%%
+
+function deX = DiffEqLQR(t, eX,A0,B0,K0)
+deX = (A0-(B0*K0))*eX;
 end
