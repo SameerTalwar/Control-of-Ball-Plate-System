@@ -82,5 +82,11 @@ grid on;
 %%
 
 function deX = DiffEqLQR(t, eX,A0,B0,K0)
-deX = (A0-(B0*K0))*eX;
+
+if (t>= 0.0010 && t <=0.0015)
+    hello = "hello";
+    randomInput = 15*rand(1);
+else randomInput = 0;
+end
+deX = (A0-(B0*K0))*eX + randomInput;
 end

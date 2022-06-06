@@ -12,7 +12,7 @@ xerrorint = 0;
 yerrorint = 0;
 timelimit=10;% time limit to reach target point
 init1=[.09;0;.05;0];% initial condition
-init=[.03;0;.09;0];
+init=[.09;0;.05;0];
 balancepos=[0 0];% balance position
 %%
 % Designing desired trajectory for regulator problem

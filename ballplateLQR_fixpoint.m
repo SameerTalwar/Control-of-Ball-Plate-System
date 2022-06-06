@@ -60,6 +60,7 @@ R = [0.01 0; 0 0.01];
 K = lqr(A,B,Q,R)
 
 sys = ss((A-B*K), B, C, D);
+impulse(sys)
 
 X0 = [0.09 0 0 0 0.05 0 0 0]';
 %t = linspace(0,3,0.5);
@@ -93,7 +94,7 @@ desiredy(simspan>timelimit)=balancepos(2);
 desiredvy=gradient(desiredy)/tstep;
 %desired=[desiredx;desiredvx;desiredy;desiredvy;gradient(desiredvx)/tstep;gradient(desiredvy)/tstep];
 %%
-figure(1)
+figure(5)
 plot(Y(:,1),Y(:,2))
 hold on
 plot(desiredx,desiredy)
