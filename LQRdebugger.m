@@ -13,58 +13,65 @@
 % Kd = derivative constant
 clear all
 clc
-Ib = 8e-6;
-Ip = 0.045;
-r = 0.02;
-m = 0.05;
-g=9.80;
-c1=1+(Ib/(m*r*r));
-c2 = m/(Ib+Ip);
 
-C1=g/c1;
-C2=g*c1;
-
-A = [0 1 0 0 0 0 0 0;
-    28.9555 0 -7 0.4045 160.9726 0 0 0.0728;
-    0 0 0 1 0 0 0 0;
-    -237.8059 -16.9088 0 0 0 0 0 0;
-    0 0 0 0 0 1 0 0;
-    160.9726 0 0 0 894.8955 0 0.3791 0.0405;
-    0 0 0 0 0 0 0 1;
-    -53.4268 -3.0185 0 0 124.4734 -33.5610 4.6392 -0.1176];
-
-B = [0 0;
-    0 0; 
-    0 0;
-    c2/m 0;
-    0 0;
-    0 0;
-    0 0;
-    0 c2/m]; 
+X0 = [0.09 0 0 0 0.05 0 0 0]';
+desired = [0.1;0;0;0;0.2;0;0;0];
+errorX0 = desired-X0;
+[A,B] = JacobianEvaluatorBPS(errorX0)
 
 C = [1 0 0 0 0 0 0 0; 0 0 0 0 1 0 0 0];
 
 D = [0 0 ; 0 0];
 
-Q = [100000 0 0 0 0 0 0 0;
+Q = [1 0 0 0 0 0 0 0;
     0 1 0 0 0 0 0 0;
     0 0 1 0 0 0 0 0;
     0 0 0 1 0 0 0 0
-    0 0 0 0 1000000 0 0 0
+    0 0 0 0 1 0 0 0
     0 0 0 0 0 1 0 0
     0 0 0 0 0 0 1 0
     0 0 0 0 0 0 0 1];
 
 R = [0.01 0; 0 0.01];
 
-K = lqr(A,B,Q,R)
+K = lqr(A,B,Q,R);
 
-sys = ss((A-B*K), B, C, D);
+%sys = ss((A-B*K), B, C, D);
 
-X0 = [0.01 0 0 0 0.01 0 0 0]';
 %t = linspace(0,3,0.5);
-t = [0: 0.01: 10];
-[Y, t, X] = initial(sys, X0, t);
+tspan = [0: 0.01: 10];
+%[Y, t, X] = initial(sys, X0, t);
+[t,eX] = ode45(@(t,eX) odeFUN(eX,A,B,K),tspan,errorX0);
+
+for n=1:length(t)
+    X(n,:) = (desired')-eX(n,:);
+end
+
+figure(1)
+plot(X(:,1),X(:,5))
+hold on
+%axis('square');
+title('Trajectory plot')
+xlabel('X axis')
+h_xlabel = get(gca,'XLabel');
+set(h_xlabel,'FontSize',20);
+ylabel('Y axis')
+h_ylabel = get(gca,'XLabel');
+set(h_ylabel,'FontSize',20);
+set(gca,'FontSize',12);
+grid on;
+
+figure(3)
+plot(t,X(:,5),'--')
+title('Tracking error of system using LQR controller')
+xlabel('Time in secs')
+h_xlabel = get(gca,'XLabel');
+set(h_xlabel,'FontSize',20);
+ylabel('Distance in m')
+h_ylabel = get(gca,'YLabel');
+set(h_ylabel,'FontSize',20);
+set(gca,'FontSize',12)
+grid on;
 
 %%
 %getting control inputs (torque)
@@ -136,7 +143,7 @@ legend('Torque_x','Torque_y')
 grid on;
 
 figure(3)
-plot(t,Y(:,1),'--',t,desiredx,'-.')
+plot(t,Y(:,1),'--')
 title('Tracking error of system using LQR controller')
 xlabel('Time in secs')
 h_xlabel = get(gca,'XLabel');
@@ -148,3 +155,7 @@ set(gca,'FontSize',12)
 % legend('Actual X trajectory','Desired X trajectory')
 grid on;
 %end
+
+function dXdt = odeFUN(X,A0,B0,K0)
+    dXdt = (A0-(B0*K0))*X;
+end
