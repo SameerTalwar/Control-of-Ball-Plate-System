@@ -9,18 +9,21 @@ warning('off',id)
 timestep=.1;
 simspan1=0:.1:2;
 simspan2=2.1:.1:20;
-simspan=[simspan1 simspan2];% Simulation Span
+%simspan=[simspan1 simspan2];% Simulation Span
+simspan = 0:0.1:20;
 X0 = [0 0 0 0 0 0 0 0];% Initial Condition
 amplitude=.04;% Radius of the circle
 
 % Designing desired trajectory
 desiredx1=zeros(1,size(simspan1,2));
 desiredx2=amplitude*sin(simspan2-2.1);
-desiredx=[desiredx1 desiredx2];
+%desiredx=[desiredx1 desiredx2];
+desiredx=amplitude*sin(simspan);
 
 desiredy1=(amplitude/5)*simspan1;
 desiredy2=amplitude*cos(simspan2-2.1);
-desiredy=[desiredy1 desiredy2];
+%desiredy=[desiredy1 desiredy2];
+desiredy=amplitude*cos(simspan);
 desiredvx=gradient(desiredx)/timestep;
 desiredvy=gradient(desiredy)/timestep;
 
@@ -40,7 +43,7 @@ desired=[desiredx;desiredvx;desiredalpha;desiredalphadot;desiredy;desiredvy;desi
 errorX0 = desired(2,1:8)-X0;
 indvtspan = [0:0.01:0.1];
 X=zeros(201,8);
-chosenRandomTime = 50 + randi(150)
+chosenRandomTime = 50 + randi(150);
 
 for n=2:200
     [A,B,K] = ballplateLQR(errorX0);
@@ -52,7 +55,7 @@ end
 %%
 %Starting Simulation
 figure(1)
-plot(X(:,1),X(:,5))
+plot(X(1:200,1),X(1:200,5))
 hold on
 plot(desiredx,desiredy)
 %axis('square');
