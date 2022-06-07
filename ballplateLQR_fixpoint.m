@@ -59,13 +59,24 @@ R = [0.01 0; 0 0.01];
 
 K = lqr(A,B,Q,R)
 
+B0 = [0 0;
+    0 0; 
+    0 0;
+    1 0;
+    0 0;
+    0 0;
+    0 0;
+    0 1]; 
+
 sys = ss((A-B*K), B, C, D);
-impulse(sys)
 
 X0 = [0.09 0 0 0 0.05 0 0 0]';
 %t = linspace(0,3,0.5);
 t = [0: 0.01: 10];
-[Y, t, X] = initial(sys, X0, t);
+U = zeros(length(t),2);
+randomTime = 0.01*randi(length(t));
+U((100*randomTime):(100*randomTime +3),:)=[20*rand(1),20*rand(1);20*rand(1),20*rand(1);20*rand(1),20*rand(1);20*rand(1),20*rand(1)];
+[Y, t, X] = lsim(sys, U, t, X0);
 
 %%
 %getting control inputs (torque)

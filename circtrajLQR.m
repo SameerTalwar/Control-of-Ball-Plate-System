@@ -40,10 +40,11 @@ desired=[desiredx;desiredvx;desiredalpha;desiredalphadot;desiredy;desiredvy;desi
 errorX0 = desired(2,1:8)-X0;
 indvtspan = [0:0.01:0.1];
 X=zeros(201,8);
+chosenRandomTime = 50 + randi(150)
 
 for n=2:200
     [A,B,K] = ballplateLQR(errorX0);
-    [t,eX] = ode45(@(t,eX) DiffEqLQR(t,eX,A,B,K),indvtspan,errorX0);
+    [t,eX] = ode45(@(t,eX) DiffEqLQR(t,eX,A,B,K,n,chosenRandomTime),indvtspan,errorX0);
     X(n,:) = desired(n,1:8) - eX(11,:);
     errorX0 = desired(n+1,1:8) - X(n,:);
 end
@@ -81,11 +82,9 @@ grid on;
 
 %%
 
-function deX = DiffEqLQR(t, eX,A0,B0,K0)
-
-if (t>= 0.0010 && t <=0.0015)
-    hello = "hello";
-    randomInput = 15*rand(1);
+function deX = DiffEqLQR(t, eX,A0,B0,K0,n,chosenRandomTime)
+if (n>=chosenRandomTime-1 && n<=chosenRandomTime+1)
+    randomInput = rand(1);
 else randomInput = 0;
 end
 deX = (A0-(B0*K0))*eX + randomInput;
