@@ -322,7 +322,7 @@ The system can now be represented having the state space model:
 Y = C X + D U\label{eq21}
 \end{align}
 where,
-\begin{equation}
+\begin{equation}\begin{split}
 C = \begin{bmatrix}
 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
@@ -330,128 +330,99 @@ C = \begin{bmatrix}
 D = \begin{bmatrix}
 0 & 0 \\
 0 & 0 \\
-\end{bmatrix} 
+\end{bmatrix} \\
+Y = \begin{bmatrix}
+x_b\\
+y_b
+\end{bmatrix}
+\mbox{ and }
+U = \begin{bmatrix}
+T_x\\
+T_y
+\end{bmatrix}
+\end{split}
 \label{eq22}\end{equation}
 
 
 
 \subsection*{LQR Controller Design}
-For this linearized state space system, the control input is proportional to the current state and is mathematically written as : <U=-KX> where K is the gain matrix.
-The system eventually becomes: <X’ = A-BKX>
-The response of this system is determined by the eigenvalues or poles. By controlling matrix K, the poles can be shifted to the left half of the complex plane to stabilize the system. Further, the position of these poles determine the response of the system, in terms of steady state error and settling time.
-One method to determine K is using manual pole placement. But it requires the intuition that a chosen eigenvalue will affect the system in the desired way. As its hard to establish a direct relation between the position of various poles and the effect it has on the system, a much more intuitive method has been adopted. Using LQR, the gain matrix K is determined according to the degree of control that needs to be applied in each dimension of the state space vector.
+For this linearized state space system, the control input is proportional to the current state and is mathematically written as : $U=-KX$ where K is the gain matrix.
+The system eventually becomes: $ \dot X = (A-BK)X$.
 
-Fixed Point Tracking: In order to stabilize the system to the fixed point, i.e. move the ball to the origin from any initial position, the following diagonal matrices have been selected:
-[Q] [R]
-Each diagonal element of Q matrix expresses the desire of the particular dimension to be aggressively stabilized, i.e. it determines the amount of penalty to be levied upon the system if the corresponding dimension is not stabilized. Each diagonal element of R matrix penalises the amount of control given to the system in the particular dimension. Thus, the quadratic cost function: <equation>  is minimised. 
-The feedback gain matrix K, is found out by solving the ricatti equation: <equation>
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{BDLQR.png}}
+\caption{Block Diagram ofLQR Controller}
+\label{fig3}
+\end{figure}
+
+The response of this system is determined by the eigenvalues or poles. By controlling matrix $K$, the poles can be shifted to the left half of the complex plane to stabilize the system. Further, the position of these poles determine the response of the system, in terms of steady state error and settling time.
+One method to determine $K$ is using manual pole placement. But it requires the intuition that a chosen eigenvalue will affect the system in the desired way. As its hard to establish a direct relation between the position of various poles and the effect it has on the system, a much more intuitive method has been adopted. Using LQR, the gain matrix $K$ is determined according to the degree of control that needs to be applied in each dimension of the state space vector.
+
+\emph{(i). Fixed Point Tracking:} In order to stabilize the system to the fixed point, i.e. move the ball to the origin from any initial position, the following diagonal matrices have been selected:
+
+\footnotesize
+%\setlength{\arraycolsep}{2.5pt}
+%\medmuskip = 1mu
+\begin{equation}
+Q = \begin{bmatrix}
+1000 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 100 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1000 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 100 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{bmatrix} ; 
+R = \begin{bmatrix}
+0 .01& 0 \\
+0 & 0.01 \\
+\end{bmatrix}\label{eq23}
+\end{equation}
+\normalsize
+Each diagonal element of $Q$ matrix expresses the desire of the particular dimension to be aggressively stabilized, i.e. it determines the amount of penalty to be levied upon the system if the corresponding dimension is not stabilized. Each diagonal element of $R$ matrix penalises the amount of control given to the system in the particular dimension. Thus, the quadratic cost function: 
+\begin{equation}
+J(u) = \int_{0}^{\infty} (x^T Q x + u^T R u + 2 x^T N u ) dt
+\label{eqn24}\end{equation}
+ is minimised. 
+The feedback gain matrix $K$, is found out by solving the ricatti equation: 
+\begin{equation}
+A^T S + SA - (SB +N) R^{-1} (b^T S + N^T) + Q = 0
+\label{eqn25}\end{equation}
+\begin{equation}
+K = R^{-1} (b^T S + N^T)
+\label{eqn26}\end{equation}
 
 In order to move the ball to any coordinate other than zero, the difference in the state of the desired position and the current position, referred to as the error, is fed to the controller which is then stabilized to the fixed point, i.e. made zero.
 
-Trajectory tracking: The ball is made to trace a circular trajectory to exhibit trajectory tracking capability. This has been achieved by constantly minimising errors between desired positions changing with time and the current position, also eventually changing with time. The catch is diminishing the error between current position and the desired position before the next point of the trajectory is fed as input to the controller. Thus, it requires higher value of elements of Q matrix and lenient R matrix such that the response time becomes significantly smaller. The following Q and R matrices have been selected: [Q] [R]
+\emph{(ii). Trajectory tracking:} The ball is made to trace a circular trajectory to exhibit trajectory tracking capability. This has been achieved by constantly minimising errors between desired positions changing with time and the current position, also eventually changing with time. The catch is diminishing the error between current position and the desired position before the next point of the trajectory is fed as input to the controller. Thus, it requires higher value of elements of Q matrix and lenient R matrix such that the response time becomes significantly smaller. The following Q and R matrices have been selected:
+
+\footnotesize
+%\setlength{\arraycolsep}{2.5pt}
+%\medmuskip = 1mu
+\begin{equation}
+Q = \begin{bmatrix}
+10^7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0.1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0.01 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0.01 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 10^7 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0.1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0.01 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.01 \\
+\end{bmatrix} ; 
+R = \begin{bmatrix}
+1& 0 \\
+0 & 1 \\
+\end{bmatrix}\label{eq27}
+\end{equation}
+\normalsize
 
 \section{Results and Discussion}
 
 \section{Novelty in work}
 
 \section{Conclusion and Future Work}
-
-
-\subsection{Units}
-\begin{itemize}
-\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
-\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
-\item Do not mix complete spellings and abbreviations of units: ``Wb/m\textsuperscript{2}'' or ``webers per square meter'', not ``webers/m\textsuperscript{2}''. Spell out units when they appear in text: ``. . . a few henries'', not ``. . . a few H''.
-\item Use a zero before decimal points: ``0.25'', not ``.25''. Use ``cm\textsuperscript{3}'', not ``cc''.)
-\end{itemize}
-
-\subsection{Equations}
-Number equations consecutively. To make your 
-equations more compact, you may use the solidus (~/~), the exp function, or 
-appropriate exponents. Italicize Roman symbols for quantities and variables, 
-but not Greek symbols. Use a long dash rather than a hyphen for a minus 
-sign. Punctuate equations with commas or periods when they are part of a 
-sentence, as in:
-\begin{equation}
-a+b=\gamma\label{eq}
-\end{equation}
-
-Be sure that the 
-symbols in your equation have been defined before or immediately following 
-the equation. Use ``\eqref{eq}'', not ``Eq.~\eqref{eq}'' or ``equation \eqref{eq}'', except at 
-the beginning of a sentence: ``Equation \eqref{eq} is . . .''
-
-
-\textbf{The class file is designed for, but not limited to, six authors.} A 
-
-\subsection{Figures and Tables}
-\paragraph{Positioning Figures and Tables} Place figures and tables at the top and 
-bottom of columns. Avoid placing them in the middle of columns. Large 
-figures and tables may span across both columns. Figure captions should be 
-below the figures; table heads should appear above the tables. Insert 
-figures and tables after they are cited in the text. Use the abbreviation 
-``Fig.~\ref{fig}'', even at the beginning of a sentence.
-
-\begin{table}[htbp]
-\caption{Table Type Styles}
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
-\cline{2-4} 
-\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
-\hline
-copy& More table copy$^{\mathrm{a}}$& &  \\
-\hline
-\multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
-\end{tabular}
-\label{tab2}
-\end{center}
-\end{table}
-
-\begin{figure}[htbp]
-\centerline{\includegraphics{fig1.png}}
-\caption{Example of a figure caption.}
-\label{fig}
-\end{figure}
-
-Figure Labels: Use 8 point Times New Roman for Figure labels. Use words 
-rather than symbols or abbreviations when writing Figure axis labels to 
-avoid confusing the reader. As an example, write the quantity 
-``Magnetization'', or ``Magnetization, M'', not just ``M''. If including 
-units in the label, present them within parentheses. Do not label axes only 
-with units. In the example, write ``Magnetization (A/m)'' or ``Magnetization 
-\{A[m(1)]\}'', not just ``A/m''. Do not label axes with a ratio of 
-quantities and units. For example, write ``Temperature (K)'', not 
-``Temperature/K''.
-
-\section*{Acknowledgment}
-
-The preferred spelling of the word ``acknowledgment'' in America is without 
-an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
-G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
-acknowledgments in the unnumbered footnote on the first page.
-
-\section*{References}
-
-Please number citations consecutively within brackets \cite{b1}. The 
-sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
-number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
-the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
-
-Number footnotes separately in superscripts. Place the actual footnote at 
-the bottom of the column in which it was cited. Do not put footnotes in the 
-abstract or reference list. Use letters for table footnotes.
-
-Unless there are six authors or more give all authors' names; do not use 
-``et al.''. Papers that have not been published, even if they have been 
-submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
-that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
-Capitalize only the first word in a paper title, except for proper nouns and 
-element symbols.
-
-For papers published in translation journals, please give the English 
-citation first, followed by the original foreign-language citation \cite{b6}.
 
 \begin{thebibliography}{00}
 \bibitem{b1} Hadipour, Mojtaba and Hosseinzadeh, Ali and Sadidi, Mohsen. (2021). Investigation of the Stability of the Ball and Beam by the PID Controller. Journal of Manufacturing Technology Management. 51-58.
@@ -470,8 +441,4 @@ citation first, followed by the original foreign-language citation \cite{b6}.
 \bibitem{b14} Bang, Heeseung and Lee, Young. (2018). Implementation of a Ball and Plate Control System Using Sliding Mode Control. IEEE Access. PP. 1-1. 10.1109/ACCESS.2018.2838544.
 \bibitem{b15}  Ernesto Fabregas, Sebastian Dormido-Canto, Sebasti ´ an´ Dormido, Virtual and Remote Laboratory with the Ball and Plate System, IFAC-PapersOnLine, Volume 50, Issue 1, 2017, Pages 9132-9137, ISSN 2405-8963
 \end{thebibliography}
-\vspace{12pt}
-\color{red}
-IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
-
 \end{document}
