@@ -12,10 +12,7 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Modeling and Robust Control of Ball Plate System using different control methodologies*\\
-{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
-should not be used}
-\thanks{Identify applicable funding agency here. If none, delete this.}
+\title{Modeling and Robust Control of Ball Plate System using different control methodologies\\
 }
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
@@ -247,69 +244,96 @@ The desired position of the ball is fed as an input to the system. The error is 
 \begin{equation}
 K_p e(t) + K_i \int_{t_0}^{t} e(t) \,dt + K_d \frac{d}{dt}e(t)
 \label{eq17}\end{equation}
-Here, the constants $K_p, K_i and K_d $are the parameters that need to be tuned to obtain the desired response. Thus with this control law, the overall transfer function of the system can be represented as: 
+Here, the constants $K_p, K_i \mbox{ and } K_d $ are the parameters that need to be tuned to obtain the desired response. Thus with this control law, the overall transfer function of the system can be represented as: 
 \begin{equation}
 T(s) = C(s)G(s) = (K_p + sK_d + \frac{K_i}{s})(\frac{1}{s^2})
 \label{eq18}\end{equation}
-From the condition of stability (all poles of this transfer function lie on the left hand side of the complex plane), the following condition has been obtained for the controller: $ K_p K_d > K_i$
-The following is a table of parameters describing the system:
+From the condition of stability (all poles of this transfer function lie on the left hand side of the complex plane), the following condition has been obtained for the controller: $ K_p K_d > K_i$.
+Table \ref{table2} lists all the parameters describing the system.
+
 \begin{table}[h!]
-\caption{System Variables and Constants}
+\caption{System parameters for PID controller}
 \begin{center}
-%\begin{tabularx}{0.4\textwidth} { 
-%  | >{\centering\arraybackslash}X 
-%  | >{\centering\arraybackslash}X | }
-\begin{tabular}{| c | c |}
+\begin{tabular}{| c | c | c |}
  \hline
- Variable & Description \\
+ Parameter & Description & Value\\
 \hline
-x$_{b}$  & x coordinate of ball on plate \\
+$m_{b}$  & mass of ball  & 4\\
 \hline
-y$_{b}$  & y coordinate of ball on plate  \\
+ $I_{b}$  & Moment of Inertia of ball  & 5\\
 \hline
-$\dot x_{b}$  & translational velocity of ball along x-axis  \\
+ $I_{p}$  & Moment of Inertia of plate  & 6\\
 \hline
-$\dot y_{b}$  & translational velocity of ball along y-axis  \\
+ $K_{p}$  & Proportional gain constant  & 7\\
 \hline
-$\alpha$ & angle of inclinatin of plate along x-axis  \\
+ $K_{d}$  & Derivative gain constant & 8\\
 \hline
- $\beta$  &  angle of inclinatin of plate along y-axis\\
+ $K_{i}$ & Integral Gain constant & 9\\
 \hline
-$\dot \alpha$ & angular speed of plate along x-axis  \\
+ $e_{t}$  & \multicolumn{2}{c|}{Error between desired and current posiition} \\
 \hline
- $\dot \beta$ & angular speed of plate along y-axis  \\
+$\frac{d}{dt}e(t)$ &\multicolumn{2}{c|}{Error between desired and current velocities}\\
 \hline
-m$_{b}$  & mass of ball \\
+$\int_{t_0}^{t} e(t) \,dt$ & \multicolumn{2}{c|}{Error integrated over time}\\
 \hline
- I$_{b}$  & Moment of Inertia of ball  \\
-\hline
- I$_{b}$  & Moment of Inertia of plate  \\
-\hline
- M  & Mass of plate \\
-\hline
- w$_{x}$  & angular speed of ball along x-axis  \\
-\hline
- w$_{y}$  & angular speed of ball along y-axis  \\
-\hline
- T$_{x}$ & Torque applied on the plate along x-axis  \\
-\hline
- T$_{y}$  & Torque applied on the plate along y-axis \\
-\hline
- r$_{b}$ & radius of ball \\
-\hline
-\end{tabular}\label{table1}
+\end{tabular}\label{table2}
 \end{center}
 \end{table}
 
 
-This control law is applied separately in both directions x and y to minimise the individually determined errors in x and y directions respectively. The selection of Kp, Ki, and Kd values give minimum settling time of the system response and negligible steady state error and are selected by hit and trial method.
-The above control law is applied to control the position of ball in two scenarios: i. Fixed point tracking and ii. Trajectory tracking.
-Fixed point tracking can further be performed using two approaches, first, giving the final position of the ball and minimising the error between desired position and starting position in minimum time. The second approach is basically trajectory tracking where the desired trajectory is a straight line path from the starting position to the final position and then staying at the final position. This approach finds application in how quickly the ball should reach the final position and taking what path.
-Trajectory tracking makes use of the underlying principles of fixed point tracking where the desired position is constantly changing point by point, and the error between the current position and the desired position at the current moment is minimised, eventually tracing a specific path. A circular trajectory has been traced in this case to show trajectory tracking capability.
+This control law is applied separately in both directions x and y to minimise the individually determined errors in x and y directions respectively. The selection of $K_p, K_i \mbox{ and } K_d $ values give minimum settling time of the system response and negligible steady state error and are selected by hit and trial method.
 
-\subsection{Method 2}
-LQR has been used to control the system modeled using approach 2. Linear Quadratic Regulator is generally employed in applications where a stability problem needs to be addressed. The ball and plate system can also be analysed and presented as a stability problem where the ball needs to be balanced on a fixed position of the plate. The system can be dynamically represented as: <equation> The state vector of the system is: <equation>. In order to simplify the system dynamics, linearization has been performed about the fixed point selected as origin. A fixed point of the system is a point where the system is stable if untouched. The horizontal position of the plate is stable when the ball is at origin (if the mass of the ball is not considerably less than the mass of the plate). If the ball is displaced from this position, system destabilizes and reaches the minimum energy point (where the vertical position of the ball is lower than its position at origin when the plate is horizontal, so that potential energy falls). In the neighbourhood of this fixed point, the system can be linearized. Hence, for the dynamical equations, Jacobian has been evaluated about the Zero state and following matrices are obtained: <A matrix> <BMatrix> <Zero State>
-The system can now be represented having the state space model: <equation>
+The above control law is applied to control the position of ball in two scenarios: (i.) Fixed point tracking and (ii.) Trajectory tracking.
+
+(i). Fixed point tracking can further be performed using two approaches, first, giving the final position of the ball and minimising the error between desired position and starting position in minimum time. The second approach is basically trajectory tracking where the desired trajectory is a straight line path from the starting position to the final position and then staying at the final position. This approach finds application in how quickly the ball should reach the final position and taking what path.
+
+(ii). Trajectory tracking makes use of the underlying principles of fixed point tracking where the desired position is constantly changing point by point, and the error between the current position and the desired position at the current moment is minimised, eventually tracing a specific path. A circular trajectory has been traced in this case to show trajectory tracking capability.
+
+\subsection{Method 2 : Using LQR}
+Linear Quadratic Regulator is generally employed in applications where a stability problem needs to be addressed. The ball and plate system can also be analysed and presented as a stability problem where the ball needs to be balanced on a fixed position of the plate. The system is dynamically represented in [\ref{eq14}] along with the 8-dimensional state vector. In order to simplify the system dynamics, linearization has been performed about the fixed point selected as origin. A fixed point of the system is a point where the system is stable if untouched. The horizontal position of the plate is stable when the ball is at origin (if the mass of the ball is not considerably less than the mass of the plate). When the ball is displaced from this position, system destabilizes and reaches the minimum energy point (where the vertical position of the ball is lower than its position at origin when the plate is horizontal, so that potential energy falls). In the neighbourhood of this fixed point, the system can be linearized. Hence, for the dynamical equations, Jacobian has been evaluated about the Zero state and following matrices are obtained: 
+\begin{equation}\begin{split}
+A = \begin{bmatrix}
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & -C & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+-C_3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & -C & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & -C_3 & 0 & 0 & 0 \\
+\end{bmatrix} ; 
+B = \begin{bmatrix}
+0 & 0 \\
+0 & 0 \\
+0 & 0 \\
+\frac{1}{C_2} & 0 \\
+0 & 0 \\
+0 & 0 \\
+0 & 0 \\
+0 & \frac{1}{C_2} \\
+\end{bmatrix}
+\\\\
+\mbox{ and Zero Vector } = X_0 = \begin{bmatrix}0 &0 &0 &0 &0 &0 &0 &0\end{bmatrix}^T
+\end{split}\label{eq19}\end{equation}
+Where $C_3 = \frac{m_b g}{C_2}$.
+The system can now be represented having the state space model:
+\begin{align}
+\dot X = A X + B U \label{eq20}\\
+Y = C X + D U\label{eq21}
+\end{align}
+where,
+\begin{equation}
+C = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+\end{bmatrix} ; 
+D = \begin{bmatrix}
+0 & 0 \\
+0 & 0 \\
+\end{bmatrix} 
+\label{eq22}\end{equation}
+
+
 
 \subsection*{LQR Controller Design}
 For this linearized state space system, the control input is proportional to the current state and is mathematically written as : <U=-KX> where K is the gain matrix.
