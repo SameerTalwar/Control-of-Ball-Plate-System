@@ -129,6 +129,7 @@ The kinetic energy of the ball is the sum of both translational and rotational e
 \begin{equation}
 T_{b} = \frac{1}{2} m_{b} \left( \dot x_{b}^{2} + \dot y_{b}^{2} \right) +  \frac{1}{2} I_{b} \left(w_{x}^{2} + w_{y}^{2} \right)\label{eq3}
 \end{equation}
+Here, we can replace the values of $w_{x} \mbox{ and } w_{y}$ as $ \dot x_{b} \! = \! w_{x}r_{b} \mbox{ and } \dot y_{b} \! = \! w_{y}r_{b}$.
 The kinetic energy of the plate is the rotational energy of a square plate with a point mass (ball assumed as a point mass) attached at coordinates $(xb, yb)$ with respect to its centre of mass:
 \begin{equation}
 T_{p} = \frac{1}{2} \left(I_{b} + I_{p}\right) (\dot \alpha^{2} + \dot \beta^{2} ) + \frac{1}{2} m_{b} ( x_{b} \dot \alpha + y_{b}\dot \alpha )^{2}\label{eq4}
@@ -180,7 +181,7 @@ x_{1} \\ x_{2} \\ x_{3} \\ x_{4}
 \end{bmatrix} \>\>;\>\>
 \dot X = \begin{bmatrix}
 \dot x \\ \frac{x_{b} \dot \alpha^{2} + y_{b} \dot \alpha \dot \beta - gsin\alpha}{C_{1}} \\ \dot y \\ \frac{y_{b} \dot \beta^{2} + x_{b} \dot \alpha \dot \beta - gsin\beta}{C_{1}}
-\end{bmatrix}%
+\end{bmatrix}\label{eq13}
 \end{equation} 
 Where, $C_{1} = 1+\frac{I_{b}}{m_{b} r_{b}^{2}}$\\
 It is evident from these equations that the non-linearity in this system is too complex to be worked upon. Thus the system is linearized and the equations are decoupled in x and y directions to apply individual control laws in independent directions x and y. Such approach is relevant when the control input is directly the angle of the plate, and hence the hardware implementation of the system involves servo motors whose angles directly map on to the angle of inclination of the plates.
@@ -190,21 +191,24 @@ In this approach, the entire system, including the plate is modeled. Thus the st
 \begin{equation}
 X = \begin{bmatrix}
 x \\ \dot x \\ \alpha \\ \dot \alpha \\ y \\ \dot y \\ \beta \\ \dot \beta
-\end{bmatrix} = 
-\begin{bmatrix}
-x_{1} \\ x_{2} \\ x_{3} \\ x_{4} \\ x_{5} \\ x_{6} \\ x_{7} \\ x_{8}
-\end{bmatrix};
+\end{bmatrix}
+%\begin{bmatrix}
+%x_{1} \\ x_{2} \\ x_{3} \\ x_{4} \\ x_{5} \\ x_{6} \\ x_{7} \\ x_{8}
+%\end{bmatrix}
+;
 \dot X = 
 \begin{bmatrix}
 \dot x 
 \\ \frac{x_{b} \dot \alpha^{2} + y_{b} \dot \alpha \dot \beta - gsin\alpha}{C_{1}} 
 \\ \dot \alpha
-\\ \frac{}{C_{2} + m_{b}x_{b}^{2}}
+\\  ( T_{x} - 2m_{b}x_{b}\dot x_{b} \dot \alpha - m_{b}x_{b} y_{b} \ddot \beta
+\\  \frac{- m_{b}y_{b}\dot x_{b} \dot \beta - m_{b}x_{b}\dot y_{b} \dot \beta - m_{b}gx_{b}cos\alpha )}{C_{2} + m_{b}x_{b}^{2}}
 \\ \dot y 
 \\ \frac{y_{b} \dot \beta^{2} + x_{b} \dot \alpha \dot \beta - gsin\beta}{C_{1}}
 \\ \dot \beta
-\\ \frac{}{C_{2} + m_{b}y_{b}^{2}}
-\end{bmatrix}
+\\ ( T_{y} - 2m_{b}y_{b}\dot y_{b} \dot \beta - m_{b}x_{b} y_{b} \ddot \alpha
+\\ \frac{- m_{b}x_{b}\dot y_{b} \dot \alpha - m_{b}y_{b}\dot x_{b} \dot \alpha - m_{b}gy_{b}cos\beta )}{C_{2} + m_{b}y_{b}^{2}}
+\end{bmatrix}\label{eq14}
 \end{equation}
 Where, $C_{2} = I_{b} + I_{p}$
 The control inputs are torques on plates applied by the motors. This approach is thus relevant to those hardware implementations in which electrical command given to the motors (as voltage or current) directly generates proportional amount of torque.
@@ -215,11 +219,37 @@ The control inputs are torques on plates applied by the motors. This approach is
 The control methodologies adopted for both the approaches to model the system are different. While in the first approach, focus is on the position of the ball and the plates are not monitored, the second approach requires monitoring and control of every aspect, namely- the angular velocities as well as angle of inclinations of plate in both directions in addition to the state of the ball.
 
 \subsection{Method 1: Using PID}
-PID control has been implemented to control the position of the ball.The system is dynamically represented as : <equation> The first step is to linearize these equations and decouple the system: 
-Thus the system can be represented in state space form as: <equation>
+PID control has been implemented to control the position of the ball.The system is dynamically represented as shown in [\ref{eq13}]. The first step is to linearize these equations and decouple the system after making certain assumptions. These decoupled equations are: 
+\begin{equation} \ddot x_b = -Csin \alpha \>\>\> ; \>\>\>  \ddot y_b = -Csin \beta \label{eq15}\end{equation} where $C = g/C1$.
+Thus the system can be represented in state space form as:
+\begin{equation}
+\dot X = A X + B U\label{eq16}
+\end{equation}
+$ A = \begin{bmatrix}
+0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0
+\end{bmatrix}$ \> ; \>
+$ B = \begin{bmatrix}
+0 & 0 \\ -C & 0 \\ 0 & 0 \\ 0 & -C
+\end{bmatrix}$ \> ; \>
+$ U = \begin{bmatrix}
+sin \alpha \\ sin \beta
+\end{bmatrix}$\\\\
+For small values of alpha and beta, the values $sin \alpha \mbox{ and } sin \beta$ can be approximated as $\alpha \mbox{ and } \beta$.
 
 \subsection*{PID Controller Design}
-The desired position of the ball is fed as an input to the system. The error is the difference between the desired position and the current position of the ball, which is minimised through the control input to the system represented by the equation: <Kpe+Kiei+Kdde> Here, the constants Kp, Ki and Kd are the parameters that need to be tuned to obtain the desired response. Thus with this control law, the overall transfer function of the system can be represented as: <equation>
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.4\textwidth]{BDPID.png}}
+\caption{Block Diagram of PID Controller}
+\label{fig2}
+\end{figure}
+The desired position of the ball is fed as an input to the system. The error is the difference between the desired position and the current position of the ball, which is minimised through the control input to the system represented by the equation:
+\begin{equation}
+K_p e(t) + K_i \int_{t_0}^{t} e(t) \,dt + K_d \frac{d}{dt}e(t)
+\label{eq17}\end{equation}
+Here, the constants $K_p, K_i and K_d $are the parameters that need to be tuned to obtain the desired response. Thus with this control law, the overall transfer function of the system can be represented as: 
+\begin{equation}
+T(s) = C(s)G(s) = (K_p + sK_d + \frac{K_i}{s})(\frac{1}{s^2})
+\label{eq18}\end{equation}
 From the condition of stability (all poles of this transfer function lie on the left hand side of the complex plane), the following condition has been obtained for the controller: <Kp*Kd > Ki >
 The following is a table of parameters describing the system:
 
