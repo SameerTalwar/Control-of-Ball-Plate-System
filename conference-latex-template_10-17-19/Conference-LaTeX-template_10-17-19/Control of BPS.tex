@@ -8,6 +8,8 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -419,26 +421,45 @@ R = \begin{bmatrix}
 \normalsize
 
 \section{Results and Discussion}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTPID2.png}}
-\caption{Fixed Point Tracking using direct method}
-\label{fig4}
+
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{FPTPID2.png}
+         \caption{Trajectory Plot}
+         \label{FP PID2 trajectory plot}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{FPTEPID2.png}
+         \caption{Tracking position with time}
+         \label{FP PID2 position with time}
+     \end{subfigure}
+        \caption{Fixed point tracking using PID$-$direct approach}
+        \label{fig4 PID2}
 \end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTEPID2.png}}
-\caption{Fixed Point Tracking using direct method}
-\label{fig5}
+
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{FPTPID.png}
+         \caption{Trajectory Plot}
+         \label{FP PID trajectory plot}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{FPTEPID.png}
+         \caption{Tracking position with time}
+         \label{FP PID position with time}
+     \end{subfigure}
+        \caption{Fixed point tracking using PID$-$trajectory approach}
+        \label{fig5 PID}
 \end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTPID.png}}
-\caption{Tracking Fixed Point as trajectory}
-\label{fig6}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTEPID.png}}
-\caption{Tracking Fixed Point as trajectory}
-\label{fig7}
-\end{figure}
+
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.4\textwidth]{DRFPTPID.png}}
 \caption{Disturbance Rejection while tracking fix-point using PID}
