@@ -170,12 +170,44 @@ Using equations \ref{eq1}-\ref{eq5} we derive the dynamical equations of the sys
 Similarly, equations can be obtained for y-direction. \\
 These equations can be manipulated to represent the system in vector form. Henceforth, the way in which these vectors are written determine the way the system is modeled and controlled.
 
-Approach 1 :
-The system inputs are taken as plate angles rather than the torques on the plate. In a way, this approach limits the system to just the segment of interest i.e., the position of the ball. The state vector is: <equation> The dynamic equation of the system is: <equation>
+\subsection*{Approach 1}
+The system inputs are taken as plate angles rather than the torques on the plate. In a way, this approach limits the system to just the segment of interest i.e., the position of the ball. The state vector and dynamic equation of the system are:
+\begin{equation} X = \begin{bmatrix}
+x \\ \dot x \\ y \\ \dot y
+\end{bmatrix} = 
+\begin{bmatrix}
+x_{1} \\ x_{2} \\ x_{3} \\ x_{4}
+\end{bmatrix} \>\>;\>\>
+\dot X = \begin{bmatrix}
+\dot x \\ \frac{x_{b} \dot \alpha^{2} + y_{b} \dot \alpha \dot \beta - gsin\alpha}{C_{1}} \\ \dot y \\ \frac{y_{b} \dot \beta^{2} + x_{b} \dot \alpha \dot \beta - gsin\beta}{C_{1}}
+\end{bmatrix}%
+\end{equation} 
+Where, $C_{1} = 1+\frac{I_{b}}{m_{b} r_{b}^{2}}$\\
 It is evident from these equations that the non-linearity in this system is too complex to be worked upon. Thus the system is linearized and the equations are decoupled in x and y directions to apply individual control laws in independent directions x and y. Such approach is relevant when the control input is directly the angle of the plate, and hence the hardware implementation of the system involves servo motors whose angles directly map on to the angle of inclination of the plates.
 
-Approach 2 : 
-In this approach, the entire system is modeled. Thus the state vector is: <equation> The dynamic equation of the system is: The control inputs are torques on plates applied by the motors. This approach is thus relevant to those hardware implementations in which electrical command given to the motors (as voltage or current) directly generates proportional amount of torque.
+\subsection*{Approach 2 }
+In this approach, the entire system, including the plate is modeled. Thus the state vector and the dynamic equation of the system are: 
+\begin{equation}
+X = \begin{bmatrix}
+x \\ \dot x \\ \alpha \\ \dot \alpha \\ y \\ \dot y \\ \beta \\ \dot \beta
+\end{bmatrix} = 
+\begin{bmatrix}
+x_{1} \\ x_{2} \\ x_{3} \\ x_{4} \\ x_{5} \\ x_{6} \\ x_{7} \\ x_{8}
+\end{bmatrix};
+\dot X = 
+\begin{bmatrix}
+\dot x 
+\\ \frac{x_{b} \dot \alpha^{2} + y_{b} \dot \alpha \dot \beta - gsin\alpha}{C_{1}} 
+\\ \dot \alpha
+\\ \frac{}{C_{2} + m_{b}x_{b}^{2}}
+\\ \dot y 
+\\ \frac{y_{b} \dot \beta^{2} + x_{b} \dot \alpha \dot \beta - gsin\beta}{C_{1}}
+\\ \dot \beta
+\\ \frac{}{C_{2} + m_{b}y_{b}^{2}}
+\end{bmatrix}
+\end{equation}
+Where, $C_{2} = I_{b} + I_{p}$
+The control inputs are torques on plates applied by the motors. This approach is thus relevant to those hardware implementations in which electrical command given to the motors (as voltage or current) directly generates proportional amount of torque.
 
 
 
