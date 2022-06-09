@@ -25,8 +25,8 @@ xerrordot = x(2)-interp1(tspan,desired(2,:),t);
 xerrorint = xerrorint + xerror;
 C=g/c;
 if (t >= 15.00 && t <= 15.34)
-    hello = "hello"
-    randomInput = 0.5*rand(1);
+    hello = "hello";
+    randomInput = 0.0*rand(1);
 else randomInput = 0;
 end
 uinstx= Kp*(xerror)+Kd*(xerrordot) + Ki*(xerrorint) + randomInput;

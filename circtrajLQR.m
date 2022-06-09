@@ -10,7 +10,7 @@ timestep=.1;
 simspan1=0:.1:2;
 simspan2=2.1:.1:20;
 %simspan=[simspan1 simspan2];% Simulation Span
-simspan = 0:0.1:20;
+simspan = 0:0.01:20;
 X0 = [0 0 0 0 0 0 0 0];% Initial Condition
 amplitude=.04;% Radius of the circle
 
@@ -41,21 +41,22 @@ desired=[desiredx;desiredvx;desiredalpha;desiredalphadot;desiredy;desiredvy;desi
 
 %%
 errorX0 = desired(2,1:8)-X0;
-indvtspan = [0:0.01:0.1];
-X=zeros(201,8);
+indvtspan = [0:0.001:0.01];
+X=zeros(2001,8);
 chosenRandomTime = 50 + randi(150);
 
-for n=2:200
+for n=2:2000
     [A,B,K] = ballplateLQR(errorX0);
     [t,eX] = ode45(@(t,eX) DiffEqLQR(t,eX,A,B,K,n,chosenRandomTime),indvtspan,errorX0);
     X(n,:) = desired(n,1:8) - eX(11,:);
+    torque(n-1,:) = -(K*(eX(1,:)'));
     errorX0 = desired(n+1,1:8) - X(n,:);
 end
 
 %%
 %Starting Simulation
 figure(1)
-plot(X(1:200,1),X(1:200,5))
+plot(X(1:2000,1),X(1:2000,5))
 hold on
 plot(desiredx,desiredy)
 %axis('square');
@@ -82,6 +83,12 @@ set(h_ylabel,'FontSize',20);
 set(gca,'FontSize',12)
 legend('Actual Y trajectory','Desired Y trajectory')
 grid on;
+
+figure(4)
+plot(simspan(2:2000), torque)
+
+figure(5)
+plot(simspan,rad2deg(X(:,3)),simspan,rad2deg(X(:,7)))
 
 %%
 

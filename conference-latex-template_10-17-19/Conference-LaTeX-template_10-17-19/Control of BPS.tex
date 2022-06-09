@@ -1,0 +1,334 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Modeling and Robust Control of Ball Plate System using different control methodologies*\\
+{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
+should not be used}
+\thanks{Identify applicable funding agency here. If none, delete this.}
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+}
+\maketitle
+
+\begin{abstract}
+Different control mechanisms for balancing the ball plate system (BPS)  have been discussed in this paper. The ball plate system is a popular nonlinear control problem and various control system strategies have been put forward to approach the problem. We put forward the analysis and comparison of three such different control approaches namely: Sliding Mode Control (SMC), Proportional Integral Derivative (PID), and Linear Quadratic Regulator (LQR). The comparison between the strategies is based on the performance of trajectory and fixed point tracking, and how the system reacts to noise and external disturbance in each case.
+\end{abstract}
+
+\begin{IEEEkeywords}
+component, formatting, style, styling, insert
+\end{IEEEkeywords}
+
+\section{Introduction}
+The ball plate system is a classic control problem and a very popular educational model to teach and validate various control strategies. The control objective of the ball and plate problem is to balance a ball or to make it track the desired trajectory, on a flat plate, solely by tilting the plate relative to the horizontal plane. This system is of particular interest to the control community because it allows the user to study and validate a wide class of both linear and nonlinear control schemes, before applying them to real-life applications that exhibit similar dynamics. The ball moves on a plate fixed with motors that control the inclination of the plate based on the control input obtained and the ball has 2DOF of motion (along X and Y axis).   The control algorithm is first verified using the derived nonlinear simulation model in MATLAB for different methods.
+The ball and plate system is an extension of the Ball and Beam system [].It is considered as a bench-mark model of a driftless nonholonomic system. A state feedback controller using the pole assignment method was designed in [] to maintain a desired position of the sphere over the plane. A computer vision technique allowed us measuring the two-dimensional position of the sphere over the plane in real time.  [] considered the feedback delay in the control loop for determining the state-space model of the Ball-Plate System, and secondly, based on the geometric method and the state feedback control an observer is synthesized. The ball and plate system is used as nonlinear, uncertain, and MIMO system to verify the effectiveness of the proposed controller.  The invasive weed optimization (IWO) method, which is one of the metaheuristic optimization algorithms, is used to obtain the optimal parameters of the proposed controller [] . In [11] the authors discuss the use of PD position controller and PD angle controller to control the ball and plate system. Design and Implementation of a Ball-Plate Control System using computer vision as a feedback sensorand Python Script for Educational Purposes in STEM Technologies is proposed in []. In their paper, Mujadin et al. [25] developed the ball plate system control using a resistive touch screen as the sensor position of the ball. 
+
+
+//pid The system is marginally stable since it contains a double pole in the origin. This results in the system having only non-decaying oscillatory components in its step response when introduced to a feedback loop. To gain stability and enhance the performance of the system a PID controller is introduced, regulating the output signal to the servo motors. Values of Kp, Ki, and Kd determine the control output that is required to attain a stable system response. Assuring that all system requirements are fulfilled to a satisfactory level, gaining system stability, values of Kp, Ki and Kd are established through an iterative process in MATLAB.
+LQR The Linear Quadratic Regulator (LQR) is a well-known method that provides optimally controlled feedback gains to enable the closed-loop stable and high-performance design of systems. Sliding mode control is a robust control strategy that guarantees a suitable response even in the face of model imprecisions and external disturbances. Robustness is achieved by employing a discontinuous control action.
+
+//Control theory and its applications are crucial when operating within the area of dynamic systems. The system should be able to recover and compensate for disturbances and external actions imposed on a given system being inherently unstable or semi-stable. Based on the simulation, a comparison of the given three strategies is also made based on their response to external disturbances. 
+
+
+\section{Modeling}
+
+\subsection{System Description}
+
+The ball-plate system developed and modeled in this case is a 2DoF system, having a simple plate and a ball placed over it. The inclination in both dimensions is provided by two motors, mounted in perpendicular directions such that the inclination provided by one motor doesn’t effect the motion in other direction. The inclination of the plate in both the directions can be utilized to balance the ball at the desired position on the plate, as well as make the ball follow a trajectory on it.
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{FBD.png}}
+\caption{Free Body Diagram of System.}
+\label{fig1}
+\end{figure}
+
+\subsection{System Equations}
+The dynamic equations of the system are derived in this section. Certain assumptions are made regarding the system which simplify the model: (1) There is no slipping of ball on the plate (2) Friction everywhere else is neglected (3) The ball is homogenous and symmetrical (4) The ball and the plate are in contact all the time. Lagrangian method is used to derive these equations. The Euler-Lagrange equation for the ball and plate system is: 
+
+\begin{equation}
+\frac{d}{dt}\left(\frac{\partial L}{\partial q_{i}}\right) - \frac{\partial L}{\partial q_{i}} = Q_{i}\label{eq1}
+\end{equation}
+
+Where $q_{i}$ represents the i direction coordinate and $Q_{i}$ stands for the composite force in the i direction. $L$ is defined as the Lagrangian of the system.
+\\The system can be described as having 4 degrees of freedom. Two, of the ball in the x and y directions, and two of the plate inclination, with rotational axis of the plate in both of these directions. Table \ref{table1} describes the variables of the system:
+
+\begin{table}[h!]
+\caption{System Variables and Constants}
+\begin{center}
+%\begin{tabularx}{0.4\textwidth} { 
+%  | >{\centering\arraybackslash}X 
+%  | >{\centering\arraybackslash}X | }
+\begin{tabular}{| c | c |}
+ \hline
+ Variable & Description \\
+\hline
+x$_{b}$  & x coordinate of ball on plate \\
+\hline
+y$_{b}$  & y coordinate of ball on plate  \\
+\hline
+$\dot x_{b}$  & translational velocity of ball along x-axis  \\
+\hline
+$\dot y_{b}$  & translational velocity of ball along y-axis  \\
+\hline
+$\alpha$ & angle of inclinatin of plate along x-axis  \\
+\hline
+ $\beta$  &  angle of inclinatin of plate along y-axis\\
+\hline
+$\dot \alpha$ & angular speed of plate along x-axis  \\
+\hline
+ $\dot \beta$ & angular speed of plate along y-axis  \\
+\hline
+m$_{b}$  & mass of ball \\
+\hline
+ I$_{b}$  & Moment of Inertia of ball  \\
+\hline
+ I$_{b}$  & Moment of Inertia of plate  \\
+\hline
+ M  & Mass of plate \\
+\hline
+ w$_{x}$  & angular speed of ball along x-axis  \\
+\hline
+ w$_{y}$  & angular speed of ball along y-axis  \\
+\hline
+ T$_{x}$ & Torque applied on the plate along x-axis  \\
+\hline
+ T$_{y}$  & Torque applied on the plate along y-axis \\
+\hline
+ r$_{b}$ & radius of ball \\
+\hline
+\end{tabular}\label{table1}
+\end{center}
+\end{table}
+
+The inclination is with respect to the horizontal plane and the coordinates are according to the position of the ball on the plate with respect to the centre of the plate.
+Then, the kinetic energy of the system ($T$) can be defined as the sum of kinetic energies of the ball and the plate: 
+\begin{equation}
+T = T_{b} + T_{p}\label{eq2}
+\end{equation}
+The kinetic energy of the ball is the sum of both translational and rotational energies with respect to its centre of mass:
+\begin{equation}
+T_{b} = \frac{1}{2} m_{b} \left( \dot x_{b}^{2} + \dot y_{b}^{2} \right) +  \frac{1}{2} I_{b} \left(w_{x}^{2} + w_{y}^{2} \right)\label{eq3}
+\end{equation}
+The kinetic energy of the plate is the rotational energy of a square plate with a point mass (ball assumed as a point mass) attached at coordinates $(xb, yb)$ with respect to its centre of mass:
+\begin{equation}
+T_{p} = \frac{1}{2} \left(I_{b} + I_{p}\right) (\dot \alpha^{2} + \dot \beta^{2} ) + \frac{1}{2} m_{b} ( x_{b} \dot \alpha + y_{b}\dot \alpha )^{2}\label{eq4}
+\end{equation}
+The relative potential energy of the system is considered as the relative potential energy of the ball with respect to its position at origin at zero inclination, and the change in potential energy of the plate is neglected:
+\begin{equation}
+V = V_{b} = m_{b} g h = m_{b} g \left( x_{b}sin\alpha + y_{b}sin\beta\right)\label{eq5}
+\end{equation}
+Thus, Lagrangian of the system is:
+\begin{equation}
+L = T - V = T_{b} + T_{p} - V_{b}\label{eq6}
+\end{equation}
+Using equations \ref{eq1}-\ref{eq5} we derive the dynamical equations of the system: 
+%\begin{align}
+\begin{equation}
+\frac{\partial L}{\partial \dot x_{b}} =  \left( m_{b} + \frac{I_{b}}{r_{b}^{2}} \right) (\dot x_{b})
+\label{eq7}\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial x_{b}} = m_{b}(x_{b}\dot\alpha^{2} + y_{b}\dot\alpha\dot\beta) - m_{b}gsin\alpha
+\label{eq8}\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \dot \alpha} = (I_{b} + I_{p})\dot\alpha + m_{b}(x_{b}^{2}\dot\alpha + x_{b}y_{b}\dot\beta)
+\label{eq9}\end{equation}
+\begin{equation}
+\frac{\partial L}{\partial \alpha} = -m_{b}gx_{b}cos\alpha
+\label{eq10}\end{equation}
+\begin{equation}
+\begin{split}
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot x_{b}}\right) - \frac{\partial L}{\partial x_{b}} = \left(m_{b} + \frac{I_{b}}{r_{b}^{2}}\right)\ddot x_{b} \\- m_{b}(x_{b}\dot\alpha^{2} + y_{b}\dot\alpha\dot\beta) + m_{b}gsin\alpha = 0
+\end{split}
+\label{eq11}\end{equation}
+\begin{equation}
+\begin{split}
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot \alpha}\right) - \frac{\partial L}{\partial \alpha} = (I_{b} + I_{p}  + m_{b}x_{b}^{2})\ddot \alpha + \\2m_{b}x_{b}\dot x_{b} \dot \alpha + m_{b}x_{b} y_{b} \ddot \beta + m_{b}y_{b}\dot x_{b} \dot \beta \\+ m_{b}x_{b}\dot y_{b} \dot \beta + m_{b}gx_{b}cos\alpha = T_{x}
+\end{split}
+\label{eq12}\end{equation}
+%\end{align}
+
+Similarly, equations can be obtained for y-direction. \\
+These equations can be manipulated to represent the system in vector form. Henceforth, the way in which these vectors are written determine the way the system is modeled and controlled.
+
+Approach 1 :
+The system inputs are taken as plate angles rather than the torques on the plate. In a way, this approach limits the system to just the segment of interest i.e., the position of the ball. The state vector is: <equation> The dynamic equation of the system is: <equation>
+It is evident from these equations that the non-linearity in this system is too complex to be worked upon. Thus the system is linearized and the equations are decoupled in x and y directions to apply individual control laws in independent directions x and y. Such approach is relevant when the control input is directly the angle of the plate, and hence the hardware implementation of the system involves servo motors whose angles directly map on to the angle of inclination of the plates.
+
+Approach 2 : 
+In this approach, the entire system is modeled. Thus the state vector is: <equation> The dynamic equation of the system is: The control inputs are torques on plates applied by the motors. This approach is thus relevant to those hardware implementations in which electrical command given to the motors (as voltage or current) directly generates proportional amount of torque.
+
+
+
+\section{Control Methodology}
+The control methodologies adopted for both the approaches to model the system are different. While in the first approach, focus is on the position of the ball and the plates are not monitored, the second approach requires monitoring and control of every aspect, namely- the angular velocities as well as angle of inclinations of plate in both directions in addition to the state of the ball.
+
+\subsection{Method 1: Using PID}
+PID control has been implemented to control the position of the ball.The system is dynamically represented as : <equation> The first step is to linearize these equations and decouple the system: 
+Thus the system can be represented in state space form as: <equation>
+
+\subsection*{PID Controller Design}
+The desired position of the ball is fed as an input to the system. The error is the difference between the desired position and the current position of the ball, which is minimised through the control input to the system represented by the equation: <Kpe+Kiei+Kdde> Here, the constants Kp, Ki and Kd are the parameters that need to be tuned to obtain the desired response. Thus with this control law, the overall transfer function of the system can be represented as: <equation>
+From the condition of stability (all poles of this transfer function lie on the left hand side of the complex plane), the following condition has been obtained for the controller: <Kp*Kd > Ki >
+The following is a table of parameters describing the system:
+
+This control law is applied separately in both directions x and y to minimise the individually determined errors in x and y directions respectively. The selection of Kp, Ki, and Kd values give minimum settling time of the system response and negligible steady state error and are selected by hit and trial method.
+The above control law is applied to control the position of ball in two scenarios: i. Fixed point tracking and ii. Trajectory tracking.
+Fixed point tracking can further be performed using two approaches, first, giving the final position of the ball and minimising the error between desired position and starting position in minimum time. The second approach is basically trajectory tracking where the desired trajectory is a straight line path from the starting position to the final position and then staying at the final position. This approach finds application in how quickly the ball should reach the final position and taking what path.
+Trajectory tracking makes use of the underlying principles of fixed point tracking where the desired position is constantly changing point by point, and the error between the current position and the desired position at the current moment is minimised, eventually tracing a specific path. A circular trajectory has been traced in this case to show trajectory tracking capability.
+
+\subsection{Method 2}
+LQR has been used to control the system modeled using approach 2. Linear Quadratic Regulator is generally employed in applications where a stability problem needs to be addressed. The ball and plate system can also be analysed and presented as a stability problem where the ball needs to be balanced on a fixed position of the plate. The system can be dynamically represented as: <equation> The state vector of the system is: <equation>. In order to simplify the system dynamics, linearization has been performed about the fixed point selected as origin. A fixed point of the system is a point where the system is stable if untouched. The horizontal position of the plate is stable when the ball is at origin (if the mass of the ball is not considerably less than the mass of the plate). If the ball is displaced from this position, system destabilizes and reaches the minimum energy point (where the vertical position of the ball is lower than its position at origin when the plate is horizontal, so that potential energy falls). In the neighbourhood of this fixed point, the system can be linearized. Hence, for the dynamical equations, Jacobian has been evaluated about the Zero state and following matrices are obtained: <A matrix> <BMatrix> <Zero State>
+The system can now be represented having the state space model: <equation>
+
+\subsection*{LQR Controller Design}
+For this linearized state space system, the control input is proportional to the current state and is mathematically written as : <U=-KX> where K is the gain matrix.
+The system eventually becomes: <X’ = A-BKX>
+The response of this system is determined by the eigenvalues or poles. By controlling matrix K, the poles can be shifted to the left half of the complex plane to stabilize the system. Further, the position of these poles determine the response of the system, in terms of steady state error and settling time.
+One method to determine K is using manual pole placement. But it requires the intuition that a chosen eigenvalue will affect the system in the desired way. As its hard to establish a direct relation between the position of various poles and the effect it has on the system, a much more intuitive method has been adopted. Using LQR, the gain matrix K is determined according to the degree of control that needs to be applied in each dimension of the state space vector.
+
+Fixed Point Tracking: In order to stabilize the system to the fixed point, i.e. move the ball to the origin from any initial position, the following diagonal matrices have been selected:
+[Q] [R]
+Each diagonal element of Q matrix expresses the desire of the particular dimension to be aggressively stabilized, i.e. it determines the amount of penalty to be levied upon the system if the corresponding dimension is not stabilized. Each diagonal element of R matrix penalises the amount of control given to the system in the particular dimension. Thus, the quadratic cost function: <equation>  is minimised. 
+The feedback gain matrix K, is found out by solving the ricatti equation: <equation>
+
+In order to move the ball to any coordinate other than zero, the difference in the state of the desired position and the current position, referred to as the error, is fed to the controller which is then stabilized to the fixed point, i.e. made zero.
+
+Trajectory tracking: The ball is made to trace a circular trajectory to exhibit trajectory tracking capability. This has been achieved by constantly minimising errors between desired positions changing with time and the current position, also eventually changing with time. The catch is diminishing the error between current position and the desired position before the next point of the trajectory is fed as input to the controller. Thus, it requires higher value of elements of Q matrix and lenient R matrix such that the response time becomes significantly smaller. The following Q and R matrices have been selected: [Q] [R]
+
+\section{Results and Discussion}
+
+\section{Novelty in work}
+
+\section{Conclusion and Future Work}
+
+
+\subsection{Units}
+\begin{itemize}
+\item Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as ``3.5-inch disk drive''.
+\item Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.
+\item Do not mix complete spellings and abbreviations of units: ``Wb/m\textsuperscript{2}'' or ``webers per square meter'', not ``webers/m\textsuperscript{2}''. Spell out units when they appear in text: ``. . . a few henries'', not ``. . . a few H''.
+\item Use a zero before decimal points: ``0.25'', not ``.25''. Use ``cm\textsuperscript{3}'', not ``cc''.)
+\end{itemize}
+
+\subsection{Equations}
+Number equations consecutively. To make your 
+equations more compact, you may use the solidus (~/~), the exp function, or 
+appropriate exponents. Italicize Roman symbols for quantities and variables, 
+but not Greek symbols. Use a long dash rather than a hyphen for a minus 
+sign. Punctuate equations with commas or periods when they are part of a 
+sentence, as in:
+\begin{equation}
+a+b=\gamma\label{eq}
+\end{equation}
+
+Be sure that the 
+symbols in your equation have been defined before or immediately following 
+the equation. Use ``\eqref{eq}'', not ``Eq.~\eqref{eq}'' or ``equation \eqref{eq}'', except at 
+the beginning of a sentence: ``Equation \eqref{eq} is . . .''
+
+
+\textbf{The class file is designed for, but not limited to, six authors.} A 
+
+\subsection{Figures and Tables}
+\paragraph{Positioning Figures and Tables} Place figures and tables at the top and 
+bottom of columns. Avoid placing them in the middle of columns. Large 
+figures and tables may span across both columns. Figure captions should be 
+below the figures; table heads should appear above the tables. Insert 
+figures and tables after they are cited in the text. Use the abbreviation 
+``Fig.~\ref{fig}'', even at the beginning of a sentence.
+
+\begin{table}[htbp]
+\caption{Table Type Styles}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
+\cline{2-4} 
+\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
+\hline
+copy& More table copy$^{\mathrm{a}}$& &  \\
+\hline
+\multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
+\end{tabular}
+\label{tab2}
+\end{center}
+\end{table}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics{fig1.png}}
+\caption{Example of a figure caption.}
+\label{fig}
+\end{figure}
+
+Figure Labels: Use 8 point Times New Roman for Figure labels. Use words 
+rather than symbols or abbreviations when writing Figure axis labels to 
+avoid confusing the reader. As an example, write the quantity 
+``Magnetization'', or ``Magnetization, M'', not just ``M''. If including 
+units in the label, present them within parentheses. Do not label axes only 
+with units. In the example, write ``Magnetization (A/m)'' or ``Magnetization 
+\{A[m(1)]\}'', not just ``A/m''. Do not label axes with a ratio of 
+quantities and units. For example, write ``Temperature (K)'', not 
+``Temperature/K''.
+
+\section*{Acknowledgment}
+
+The preferred spelling of the word ``acknowledgment'' in America is without 
+an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
+G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
+acknowledgments in the unnumbered footnote on the first page.
+
+\section*{References}
+
+Please number citations consecutively within brackets \cite{b1}. The 
+sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
+number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
+the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
+
+Number footnotes separately in superscripts. Place the actual footnote at 
+the bottom of the column in which it was cited. Do not put footnotes in the 
+abstract or reference list. Use letters for table footnotes.
+
+Unless there are six authors or more give all authors' names; do not use 
+``et al.''. Papers that have not been published, even if they have been 
+submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
+that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
+Capitalize only the first word in a paper title, except for proper nouns and 
+element symbols.
+
+For papers published in translation journals, please give the English 
+citation first, followed by the original foreign-language citation \cite{b6}.
+
+\begin{thebibliography}{00}
+\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
+\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
+\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
+\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
+\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
+\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
+\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
+\end{thebibliography}
+\vspace{12pt}
+\color{red}
+IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
+
+\end{document}
