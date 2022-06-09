@@ -75,7 +75,7 @@ X0 = [0.09 0 0 0 0.05 0 0 0]';
 t = [0: 0.01: 10];
 U = zeros(length(t),2);
 randomTime = 0.01*randi(length(t));
-U((100*randomTime):(100*randomTime +3),:)=[20*rand(1),20*rand(1);20*rand(1),20*rand(1);20*rand(1),20*rand(1);20*rand(1),20*rand(1)];
+%U((100*randomTime):(100*randomTime +3),:)=[20*rand(1),20*rand(1);20*rand(1),20*rand(1);20*rand(1),20*rand(1);20*rand(1),20*rand(1)];
 [Y, t, X] = lsim(sys, U, t, X0);
 
 %%

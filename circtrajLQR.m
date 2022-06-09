@@ -72,7 +72,7 @@ legend('Actual Trajectory','Desired Trajectory')
 grid on;
 
 figure(3)
-plot(simspan,X(:,5),'--',simspan,desiredy,'-.')
+plot(simspan,X(:,5),'r',simspan,desiredy,'b-.')
 title('Tracking error of system using LQR controller')
 xlabel('Time in secs')
 h_xlabel = get(gca,'XLabel');
@@ -86,15 +86,31 @@ grid on;
 
 figure(4)
 plot(simspan(2:2000), torque)
+title('Motor torque')
+xlabel('time')
+h_xlabel = get(gca,'XLabel');
+set(h_xlabel,'FontSize',20);
+ylabel('Torque')
+h_ylabel = get(gca,'XLabel');
+set(h_ylabel,'FontSize',20);
+set(gca,'FontSize',12);
+legend('Torque_x','Torque_y')
+grid on;
 
 figure(5)
 plot(simspan,rad2deg(X(:,3)),simspan,rad2deg(X(:,7)))
+title('Plate Angles')
+legend('Motor X angle','Motor Y angle')
+xlabel('Time in seconds')
+ylabel('Angle in degrees')
+set(gca,'FontSize',12)
+grid on
 
 %%
 
 function deX = DiffEqLQR(t, eX,A0,B0,K0,n,chosenRandomTime)
 if (n>=chosenRandomTime-1 && n<=chosenRandomTime+1)
-    randomInput = rand(1);
+    randomInput = 0*rand(1);
 else randomInput = 0;
 end
 deX = (A0-(B0*K0))*eX + randomInput;

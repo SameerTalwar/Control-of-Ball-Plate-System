@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.6)  9 JUN 2022 06:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.6)  10 JUN 2022 01:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -310,305 +310,271 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 (D:\MikTex\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 33.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 30.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 30.
 
 
 (D:\MikTex\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 33.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
 
  (D:\MikTex\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 33.
-<FBD.png, id=1, 519.74174pt x 275.8305pt>
-File: FBD.png Graphic file (type png)
-<use FBD.png>
-Package pdftex.def Info: FBD.png  used on input line 60.
-(pdftex.def)             Requested size: 258.0pt x 136.92583pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: Citation `b1' on page 1 undefined on input line 43.
 
- [1{C:/Users/SAMEER TALWAR/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
+
+LaTeX Warning: Citation `b2' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b3' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b4' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b5' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b6' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b7' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b8' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b9' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b10' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b11' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Citation `b12' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `b13' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `b14' on page 1 undefined on input line 44.
+
+
+LaTeX Warning: Citation `b15' on page 1 undefined on input line 44.
+
+[1{C:/Users/SAMEER TALWAR/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 
 ]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 \end{tabularx}
-                    
-? 
+<FBD.png, id=9, 519.74174pt x 275.8305pt>
+File: FBD.png Graphic file (type png)
+<use FBD.png>
+Package pdftex.def Info: FBD.png  used on input line 58.
+(pdftex.def)             Requested size: 258.0pt x 136.92583pt.
+
+
+LaTeX Warning: Reference `table1' on page 2 undefined on input line 71.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `eq1' on page 2 undefined on input line 143.
+
+
+LaTeX Warning: Reference `eq5' on page 2 undefined on input line 143.
+
 [2 <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-templ
-ate_10-17-19/FBD.png>] [3]
+ate_10-17-19/FBD.png>]
 
-LaTeX Warning: Reference `eq' on page 4 undefined on input line 205.
-
-
-LaTeX Warning: Reference `eq' on page 4 undefined on input line 205.
+LaTeX Warning: Reference `eq13' on page 3 undefined on input line 220.
 
 
-LaTeX Warning: Reference `eq' on page 4 undefined on input line 205.
+Underfull \hbox (badness 10000) in paragraph at lines 225--236
+
+ []
+
+<BDPID.png, id=24, 575.14874pt x 339.2675pt>
+File: BDPID.png Graphic file (type png)
+<use BDPID.png>
+Package pdftex.def Info: BDPID.png  used on input line 239.
+(pdftex.def)             Requested size: 206.39685pt x 121.74794pt.
+
+LaTeX Warning: Reference `table2' on page 3 undefined on input line 252.
+
+[3 <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-templ
+ate_10-17-19/BDPID.png>]
+
+LaTeX Warning: Reference `eq14' on page 4 undefined on input line 293.
 
 
-LaTeX Warning: Reference `eq' on page 4 undefined on input line 206.
+Overfull \hbox (17.21123pt too wide) detected at line 317
+[]
+ []
 
-
-LaTeX Warning: Reference `fig' on page 4 undefined on input line 217.
-
-<fig1.png, id=25, 82.1469pt x 71.5473pt>
-File: fig1.png Graphic file (type png)
-<use fig1.png>
-Package pdftex.def Info: fig1.png  used on input line 237.
-(pdftex.def)             Requested size: 82.14668pt x 71.5471pt.
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 2
-48.
-(D:\MikTex\tex/latex/psnfss\omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 248.
-
-
-LaTeX Warning: Citation `b1' on page 4 undefined on input line 261.
-
-
-LaTeX Warning: Citation `b2' on page 4 undefined on input line 262.
-
-
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 263.
-
-
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 263.
-
-
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 263.
-
-
-LaTeX Warning: Citation `b3' on page 4 undefined on input line 264.
-
-
-LaTeX Warning: Citation `b4' on page 4 undefined on input line 272.
-
-
-LaTeX Warning: Citation `b5' on page 4 undefined on input line 273.
-
-
-LaTeX Warning: Citation `b6' on page 4 undefined on input line 278.
-
+<BDLQR.png, id=32, 210.0648pt x 96.8418pt>
+File: BDLQR.png Graphic file (type png)
+<use BDLQR.png>
+Package pdftex.def Info: BDLQR.png  used on input line 353.
+(pdftex.def)             Requested size: 258.0pt x 118.9403pt.
 [4 <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-templ
-ate_10-17-19/fig1.png (PNG copy)>]
+ate_10-17-19/BDLQR.png>]
+Overfull \hbox (5.30605pt too wide) detected at line 418
+[]\OML/cmm/m/it/8 Q \OT1/cmr/m/n/8 = [] ; \OML/cmm/m/it/8 R \OT1/cmr/m/n/8 = []
+
+ []
+
+<FPTPID2.png, id=38, 389.65575pt x 331.2375pt>
+File: FPTPID2.png Graphic file (type png)
+<use FPTPID2.png>
+Package pdftex.def Info: FPTPID2.png  used on input line 423.
+(pdftex.def)             Requested size: 206.39685pt x 175.459pt.
+<FPTEPID2.png, id=39, 383.63326pt x 310.761pt>
+File: FPTEPID2.png Graphic file (type png)
+<use FPTEPID2.png>
+Package pdftex.def Info: FPTEPID2.png  used on input line 428.
+(pdftex.def)             Requested size: 206.39685pt x 167.192pt.
+<FPTPID.png, id=40, 564.30824pt x 467.346pt>
+File: FPTPID.png Graphic file (type png)
+<use FPTPID.png>
+Package pdftex.def Info: FPTPID.png  used on input line 433.
+(pdftex.def)             Requested size: 206.39685pt x 170.93286pt.
+<FPTEPID.png, id=41, 383.031pt x 314.3745pt>
+File: FPTEPID.png Graphic file (type png)
+<use FPTEPID.png>
+Package pdftex.def Info: FPTEPID.png  used on input line 438.
+(pdftex.def)             Requested size: 206.39685pt x 169.40471pt.
+<DRFPTPID.png, id=42, 400.49625pt x 314.3745pt>
+File: DRFPTPID.png Graphic file (type png)
+<use DRFPTPID.png>
+Package pdftex.def Info: DRFPTPID.png  used on input line 443.
+(pdftex.def)             Requested size: 206.39685pt x 162.0174pt.
+<DRFPTEPID.png, id=43, 383.031pt x 311.9655pt>
+File: DRFPTEPID.png Graphic file (type png)
+<use DRFPTEPID.png>
+Package pdftex.def Info: DRFPTEPID.png  used on input line 448.
+(pdftex.def)             Requested size: 206.39685pt x 168.1066pt.
+<DRFPPAPID.png, id=44, 383.63326pt x 308.95425pt>
+File: DRFPPAPID.png Graphic file (type png)
+<use DRFPPAPID.png>
+Package pdftex.def Info: DRFPPAPID.png  used on input line 453.
+(pdftex.def)             Requested size: 206.39685pt x 166.21996pt.
+<CTPID.png, id=45, 498.06075pt x 489.027pt>
+File: CTPID.png Graphic file (type png)
+<use CTPID.png>
+Package pdftex.def Info: CTPID.png  used on input line 458.
+(pdftex.def)             Requested size: 206.39685pt x 202.6514pt.
+<CPAPID.png, id=46, 328.22626pt x 314.3745pt>
+File: CPAPID.png Graphic file (type png)
+<use CPAPID.png>
+Package pdftex.def Info: CPAPID.png  used on input line 463.
+(pdftex.def)             Requested size: 206.39685pt x 197.6876pt.
+<DRCTPID.png, id=47, 529.98pt x 522.15076pt>
+File: DRCTPID.png Graphic file (type png)
+<use DRCTPID.png>
+Package pdftex.def Info: DRCTPID.png  used on input line 468.
+(pdftex.def)             Requested size: 206.39685pt x 203.35115pt.
+<FPTLQR.png, id=48, 400.49625pt x 313.17pt>
+File: FPTLQR.png Graphic file (type png)
+<use FPTLQR.png>
+Package pdftex.def Info: FPTLQR.png  used on input line 473.
+(pdftex.def)             Requested size: 206.39685pt x 161.39664pt.
+<DRFPTLQR.png, id=49, 557.08125pt x 472.76625pt>
+File: DRFPTLQR.png Graphic file (type png)
+<use DRFPTLQR.png>
+Package pdftex.def Info: DRFPTLQR.png  used on input line 478.
+(pdftex.def)             Requested size: 206.39685pt x 175.15883pt.
+<DRFPTELQR.png, id=50, 387.24675pt x 313.77225pt>
+File: DRFPTELQR.png Graphic file (type png)
+<use DRFPTELQR.png>
+Package pdftex.def Info: DRFPTELQR.png  used on input line 483.
+(pdftex.def)             Requested size: 206.39685pt x 167.2369pt.
+<DRFPPALQR.png, id=51, 383.031pt x 313.17pt>
+File: DRFPPALQR.png Graphic file (type png)
+<use DRFPPALQR.png>
+Package pdftex.def Info: DRFPPALQR.png  used on input line 488.
+(pdftex.def)             Requested size: 206.39685pt x 168.75566pt.
+<DRFPMTLQR.png, id=52, 397.485pt x 311.36325pt>
+File: DRFPMTLQR.png Graphic file (type png)
+<use DRFPMTLQR.png>
+Package pdftex.def Info: DRFPMTLQR.png  used on input line 493.
+(pdftex.def)             Requested size: 206.39685pt x 161.68176pt.
+
+LaTeX Warning: File `.png' not found on input line 498.
+
+
+! Package pdftex.def Error: File `.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.498 ...cludegraphics[width=0.4\textwidth]{.png}}
+                                                  
+? 
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 4
+98.
+(D:\MikTex\tex/latex/psnfss\ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+<DRCTLQR.png, id=53, 503.481pt x 518.53725pt>
+File: DRCTLQR.png Graphic file (type png)
+<use DRCTLQR.png>
+Package pdftex.def Info: DRCTLQR.png  used on input line 503.
+(pdftex.def)             Requested size: 206.39685pt x 212.56999pt.
+<DRCTELQR.png, id=54, 594.42075pt x 498.06075pt>
+File: DRCTELQR.png Graphic file (type png)
+<use DRCTELQR.png>
+Package pdftex.def Info: DRCTELQR.png  used on input line 508.
+(pdftex.def)             Requested size: 206.39685pt x 172.9407pt.
+<DRCPALQR.png, id=55, 391.4625pt x 310.15875pt>
+File: DRCPALQR.png Graphic file (type png)
+<use DRCPALQR.png>
+Package pdftex.def Info: DRCPALQR.png  used on input line 513.
+(pdftex.def)             Requested size: 206.39685pt x 163.53148pt.
+<DRCMTLQR.png, id=56, 395.076pt x 311.9655pt>
+File: DRCMTLQR.png Graphic file (type png)
+<use DRCMTLQR.png>
+Package pdftex.def Info: DRCMTLQR.png  used on input line 518.
+(pdftex.def)             Requested size: 206.39685pt x 162.97986pt.
+ [5 <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-temp
+late_10-17-19/FPTPID2.png> <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-1
+9/Conference-LaTeX-template_10-17-19/FPTEPID2.png>] [6 <D:/BPS/BPS_MATLAB/confe
+rence-latex-template_10-17-19/Conference-LaTeX-template_10-17-19/FPTPID.png> <D
+:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-template_1
+0-17-19/FPTEPID.png> <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conf
+erence-LaTeX-template_10-17-19/DRFPTPID.png> <D:/BPS/BPS_MATLAB/conference-late
+x-template_10-17-19/Conference-LaTeX-template_10-17-19/DRFPTEPID.png> <D:/BPS/B
+PS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-template_10-17-19
+/DRFPPAPID.png> <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conferenc
+e-LaTeX-template_10-17-19/CTPID.png>]
+[7 <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-templ
+ate_10-17-19/CPAPID.png> <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/
+Conference-LaTeX-template_10-17-19/DRCTPID.png> <D:/BPS/BPS_MATLAB/conference-l
+atex-template_10-17-19/Conference-LaTeX-template_10-17-19/FPTLQR.png> <D:/BPS/B
+PS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-template_10-17-19
+/DRFPTLQR.png> <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference
+-LaTeX-template_10-17-19/DRFPTELQR.png> <D:/BPS/BPS_MATLAB/conference-latex-tem
+plate_10-17-19/Conference-LaTeX-template_10-17-19/DRFPPALQR.png>] [8 <D:/BPS/BP
+S_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-template_10-17-19/
+DRFPMTLQR.png> <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference
+-LaTeX-template_10-17-19/DRCTLQR.png> <D:/BPS/BPS_MATLAB/conference-latex-templ
+ate_10-17-19/Conference-LaTeX-template_10-17-19/DRCTELQR.png> <D:/BPS/BPS_MATLA
+B/conference-latex-template_10-17-19/Conference-LaTeX-template_10-17-19/DRCPALQ
+R.png> <D:/BPS/BPS_MATLAB/conference-latex-template_10-17-19/Conference-LaTeX-t
+emplate_10-17-19/DRCMTLQR.png>]
+Package textcomp Info: Symbol \textasciiacute not provided by
+(textcomp)             font family ptm in TS1 encoding.
+(textcomp)             Default family used instead on input line 543.
+Package textcomp Info: Symbol \textasciiacute not provided by
+(textcomp)             font family ptm in TS1 encoding.
+(textcomp)             Default family used instead on input line 543.
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -620,7 +586,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[5
+[9
 
 ] (Control of BPS.aux)
 
@@ -631,25 +597,30 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 4357 strings out of 478614
- 66966 string characters out of 2859512
- 380315 words of memory out of 3000000
- 22465 multiletter control sequences out of 15000+600000
- 515542 words of font info for 118 fonts, out of 8000000 for 9000
+ 4603 strings out of 478614
+ 70156 string characters out of 2859512
+ 392209 words of memory out of 3000000
+ 22680 multiletter control sequences out of 15000+600000
+ 511528 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,13n,62p,1500b,314s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{D:/MikTex/fonts/enc/dvips/base/8r.enc}<D:/MikTex/fonts/type1/public/amsfonts
-/cm/cmex10.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/MikTex/
-fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/MikTex/fonts/type1/public/amsfonts
-/cm/cmmi8.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/MikTex/fo
-nts/type1/public/amsfonts/cm/cmr6.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmsy6.pfb><D:/MikTex/font
-s/type1/public/amsfonts/cm/cmsy7.pfb><D:/MikTex/fonts/type1/urw/times/utmb8a.pf
-b><D:/MikTex/fonts/type1/urw/times/utmbi8a.pfb><D:/MikTex/fonts/type1/urw/times
-/utmr8a.pfb><D:/MikTex/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Control of BPS.pdf" (5 pages, 238022 bytes).
+ 55i,21n,62p,2313b,332s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\SAMEER TALWAR\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
+600\tcrm0800.pk>{D:/MikTex/fonts/enc/dvips/base/8r.enc}<D:/MikTex/fonts/type1/p
+ublic/amsfonts/cm/cmex10.pfb><D:/MikTex/fonts/type1/public/amsfonts/cmextra/cme
+x8.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/MikTex/fonts/ty
+pe1/public/amsfonts/cm/cmmi5.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmmi
+6.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/MikTex/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmr10.
+pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmr5.pfb><D:/MikTex/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmr7.pfb><
+D:/MikTex/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/MikTex/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb><D:/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:
+/MikTex/fonts/type1/urw/courier/ucrr8a.pfb><D:/MikTex/fonts/type1/urw/times/utm
+b8a.pfb><D:/MikTex/fonts/type1/urw/times/utmbi8a.pfb><D:/MikTex/fonts/type1/urw
+/times/utmr8a.pfb><D:/MikTex/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "Control of BPS.pdf" (9 pages, 896348 bytes).
 PDF statistics:
- 88 PDF objects out of 1000 (max. 8388607)
+ 178 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
