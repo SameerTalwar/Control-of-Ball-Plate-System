@@ -250,8 +250,56 @@ Here, the constants $K_p, K_i and K_d $are the parameters that need to be tuned 
 \begin{equation}
 T(s) = C(s)G(s) = (K_p + sK_d + \frac{K_i}{s})(\frac{1}{s^2})
 \label{eq18}\end{equation}
-From the condition of stability (all poles of this transfer function lie on the left hand side of the complex plane), the following condition has been obtained for the controller: <Kp*Kd > Ki >
+From the condition of stability (all poles of this transfer function lie on the left hand side of the complex plane), the following condition has been obtained for the controller: $ K_p K_d > K_i$
 The following is a table of parameters describing the system:
+\begin{table}[h!]
+\caption{System Variables and Constants}
+\begin{center}
+%\begin{tabularx}{0.4\textwidth} { 
+%  | >{\centering\arraybackslash}X 
+%  | >{\centering\arraybackslash}X | }
+\begin{tabular}{| c | c |}
+ \hline
+ Variable & Description \\
+\hline
+x$_{b}$  & x coordinate of ball on plate \\
+\hline
+y$_{b}$  & y coordinate of ball on plate  \\
+\hline
+$\dot x_{b}$  & translational velocity of ball along x-axis  \\
+\hline
+$\dot y_{b}$  & translational velocity of ball along y-axis  \\
+\hline
+$\alpha$ & angle of inclinatin of plate along x-axis  \\
+\hline
+ $\beta$  &  angle of inclinatin of plate along y-axis\\
+\hline
+$\dot \alpha$ & angular speed of plate along x-axis  \\
+\hline
+ $\dot \beta$ & angular speed of plate along y-axis  \\
+\hline
+m$_{b}$  & mass of ball \\
+\hline
+ I$_{b}$  & Moment of Inertia of ball  \\
+\hline
+ I$_{b}$  & Moment of Inertia of plate  \\
+\hline
+ M  & Mass of plate \\
+\hline
+ w$_{x}$  & angular speed of ball along x-axis  \\
+\hline
+ w$_{y}$  & angular speed of ball along y-axis  \\
+\hline
+ T$_{x}$ & Torque applied on the plate along x-axis  \\
+\hline
+ T$_{y}$  & Torque applied on the plate along y-axis \\
+\hline
+ r$_{b}$ & radius of ball \\
+\hline
+\end{tabular}\label{table1}
+\end{center}
+\end{table}
+
 
 This control law is applied separately in both directions x and y to minimise the individually determined errors in x and y directions respectively. The selection of Kp, Ki, and Kd values give minimum settling time of the system response and negligible steady state error and are selected by hit and trial method.
 The above control law is applied to control the position of ball in two scenarios: i. Fixed point tracking and ii. Trajectory tracking.
