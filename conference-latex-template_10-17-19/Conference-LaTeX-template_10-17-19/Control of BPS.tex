@@ -8,8 +8,6 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{tabularx}
-\usepackage{caption}
-\usepackage{subcaption}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -50,7 +48,6 @@ The  BPS is marginally stable since it contains a double pole in the origin. Thi
 Control theory and its applications are crucial when operating within the area of dynamic systems. The system should be able to recover and compensate for disturbances and external actions imposed on a given system being inherently unstable or semi-stable. Based on the simulation, a comparison of the given three strategies is also made based on their response to external disturbances. 
 
 This paper is organized as follows. Section [II] presents the modeling of ball plate system including the system description, mathematical model, state space vector description. Section [III] provides description of control methodologies used for both PID, LQR. Section [IV] presents the results of our simulation and discusses our observation for both methods. Section [V] shows how our work differs from amny other proposed schemes and finally Section [VI] concludes the paper.
-
 
 
 
@@ -424,45 +421,26 @@ R = \begin{bmatrix}
 \normalsize
 
 \section{Results and Discussion}
-
-\begin{figure}[h]
-     \centering
-     \begin{subfigure}[b]{0.24\textwidth}
-         \centering
-         \includegraphics[width=\textwidth, height=\textwidth]{FPTPID2.png}
-         \caption{Trajectory Plot}
-         \label{FP PID2 trajectory plot}
-     \end{subfigure}
- %    \hfill
-     \begin{subfigure}[b]{0.24\textwidth}
-         \centering
-         \includegraphics[width=\textwidth,height=\textwidth]{FPTEPID2.png}
-         \caption{Tracking position with time}
-         \label{FP PID2 position with time}
-     \end{subfigure}
-        \caption{Fixed point tracking using PID$-$direct approach}
-        \label{fig4 PID2}
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.4\textwidth]{FPTPID2.png}}
+\caption{Fixed Point Tracking using direct method}
+\label{fig4}
 \end{figure}
-
-\begin{figure}[h]
-     \centering
-     \begin{subfigure}[b]{0.24\textwidth}
-         \centering
-         \includegraphics[width=\textwidth, height=\textwidth]{FPTPID.png}
-         \caption{Trajectory Plot}
-         \label{FP PID trajectory plot}
-     \end{subfigure}
- %    \hfill
-     \begin{subfigure}[b]{0.24\textwidth}
-         \centering
-         \includegraphics[width=\textwidth,height=\textwidth]{FPTEPID.png}
-         \caption{Tracking position with time}
-         \label{FP PID position with time}
-     \end{subfigure}
-        \caption{Fixed point tracking using PID$-$trajectory approach}
-        \label{fig5 PID}
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.4\textwidth]{FPTEPID2.png}}
+\caption{Fixed Point Tracking using direct method}
+\label{fig5}
 \end{figure}
-
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.4\textwidth]{FPTPID.png}}
+\caption{Tracking Fixed Point as trajectory}
+\label{fig6}
+\end{figure}
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.4\textwidth]{FPTEPID.png}}
+\caption{Tracking Fixed Point as trajectory}
+\label{fig7}
+\end{figure}
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.4\textwidth]{DRFPTPID.png}}
 \caption{Disturbance Rejection while tracking fix-point using PID}
@@ -541,7 +519,6 @@ R = \begin{bmatrix}
 The control algorithms for PID and LQR were succesfully implemented for fixed and trajectory tracking. The simulation results showed that the ball would follow proper trajectory with a very small error in each case. However, based on the settling time and better response we can say that LQR performed better than PID for some parts. 
 
 In our future works, we would try to improve the response of the system more. After the simulation of these two methods successfully, we would work on the analysis of a few more control methods like SMC, Fuzzy Control. We would also try to incorporate approaches like Machine Learning to improve the response of the system. Then we'll implement the ball plate system in hardware and observe the performance for each method. We would also like to propose for our future work trajectory planning and tracking problem of ball and plate system where the ball reaches from one point on the plate to another point based on a set trajectory and avoiding hurdles in it's path. 
-
 \begin{thebibliography}{00}
 \bibitem{b1} Hadipour, Mojtaba and Hosseinzadeh, Ali and Sadidi, Mohsen. (2021). Investigation of the Stability of the Ball and Beam by the PID Controller. Journal of Manufacturing Technology Management. 51-58.
 \bibitem{b2} Núñez, Acosta and Jiménez: Control of a ball-and-plate system using a State-feedback controller
