@@ -32,11 +32,11 @@ email address or ORCID}
 \maketitle
 
 \begin{abstract}
-Different control mechanisms for balancing the ball plate system (BPS)  have been discussed in this paper. The ball plate system is a popular nonlinear control problem and various control system strategies have been put forward to approach the problem. We put forward the analysis and comparison of three such different control approaches namely: Sliding Mode Control (SMC), Proportional Integral Derivative (PID), and Linear Quadratic Regulator (LQR). The comparison between the strategies is based on the performance of trajectory and fixed point tracking, and how the system reacts to noise and external disturbance in each case.
+The ball plate system is a popular nonlinear control problem and various control system strategies have been put forward to approach the problem. This paper on ball plate system focuses on the analyses and comparison of two strategies of Ball Plate System, i.e, Proportional Integral Derivative (PID) and Linear Quadratic Regulator (LQR). The comparison between the strategies is based on the performance of trajectory tracking of a circle and fixed point tracking, and how the system reacts to noise and external disturbance in each case. The control schemes are simulated in MATLAB after modelling the system.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert
+Ball plate system, PID, LQR, trajectory tracking, fixed point tracking
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -540,7 +540,7 @@ R = \begin{bmatrix}
 \section{Conclusion and Future Work}
 The control algorithms for PID and LQR were succesfully implemented for fixed and trajectory tracking. The simulation results showed that the ball would follow proper trajectory with a very small error in each case. However, based on the settling time and better response we can say that LQR performed better than PID for some parts. 
 
-In our future works, we would try to improve the response of the system more. After the simulation of these two methods successfully, we would work on the analysis of a few more control methods like SMC, Fuzzy Control. We would also try to incorporate approaches like Machine Learning to improve the response of the system. Then we'll implement the ball plate system in hardware and observe the performance for each method. We would also like to propose for our future work trajectory planning and tracking problem of ball and plate system where the ball reaches from one point on the plate to another point based on a set trajectory and avoiding hurdles in it's path.
+In our future works, we would try to improve the response of the system more. After the simulation of these two methods successfully, we would work on the analysis of a few more control methods like SMC, Fuzzy Control. We would also try to incorporate approaches like Machine Learning to improve the response of the system. Then we'll implement the ball plate system in hardware and observe the performance for each method. We would also like to propose for our future work trajectory planning and tracking problem of ball and plate system where the ball reaches from one point on the plate to another point based on a set trajectory and avoiding hurdles in it's path. 
 
 \begin{thebibliography}{00}
 \bibitem{b1} Hadipour, Mojtaba and Hosseinzadeh, Ali and Sadidi, Mohsen. (2021). Investigation of the Stability of the Ball and Beam by the PID Controller. Journal of Manufacturing Technology Management. 51-58.
