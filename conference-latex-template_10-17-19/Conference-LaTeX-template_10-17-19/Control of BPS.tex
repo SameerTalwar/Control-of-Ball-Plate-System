@@ -8,6 +8,8 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subcaption}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -30,7 +32,7 @@ email address or ORCID}
 \maketitle
 
 \begin{abstract}
-The ball plate system is a popular nonlinear control problem and various control system strategies have been put forward to approach the problem. This paper on ball plate system focuses on the analyses and comparison of two strategies of Ball Plate System, i.e, Proportional Integral Derivative (PID) and Linear Quadratic Regulator (LQR). The comparison between the strategies is based on the performance of trajectory tracking of a circle and fixed point tracking, and how the system reacts to noise and external disturbance in each case. The control schemes are simulated in MATLAB after modelling the system.
+The ball plate system is a popular nonlinear control problem and various control system strategies have been put forward to approach the problem. This paper on the ball plate system focuses on the analysis and comparison of two strategies of control, Proportional Integral Derivative (PID) and Linear Quadratic Regulator (LQR). The comparison between these strategies is based on the performance in trajectory tracking of a circle and fixed point tracking, and how the system reacts to noise and external disturbance in each case. The control schemes are simulated in MATLAB after modelling the system.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -38,16 +40,17 @@ Ball plate system, PID, LQR, trajectory tracking, fixed point tracking
 \end{IEEEkeywords}
 
 \section{Introduction}
-The ball plate system is a very popular educational model to teach and validate various control strategies. The control objective of the ball and plate problem is to balance a ball or to make it track the desired trajectory, on a flat plate, solely by tilting the plate relative to the horizontal plane. This system is of particular interest to the control community because it allows the user to study and validate a wide class of both linear and nonlinear control schemes, before applying them to real-life applications that exhibit similar dynamics. The ball moves on a plate fixed with motors that control the inclination of the plate based on the control input obtained and the ball has 2DOF of motion (along the X and Y-axis). The control algorithm is first verified using the derived nonlinear simulation model in MATLAB for given methods.
+The ball plate system is a very popular educational model to teach and validate various control strategies. The control objective of the ball and plate problem is to balance a ball or to make it trace a desired trajectory on a flat plate, solely by tilting the plate relative to the horizontal plane. This system is of particular interest to the control community because it allows the user to study and validate a wide class of both linear and nonlinear control schemes before applying them to real-life applications that exhibit similar dynamics. The ball moves on a plate fixed with motors that control the inclination of the plate based on the control input obtained and the ball has 2DOF of motion (along the X and Y-axis). The control algorithm is first verified using the derived nonlinear simulation model in MATLAB for given methods.
 
-The ball and plate system is an extension of the Ball and Beam system \cite{b1}. It is considered a benchmark model of a driftless nonholonomic system. A state feedback controller using the pole assignment method was designed in \cite{b2} to maintain a desired position of the sphere over the plane. A computer vision technique allowed us to measure the two-dimensional position of the sphere over the plane in real-time. \cite{b3} considered the feedback delay in the control loop for determining the state-space model of the Ball-Plate System, and secondly, based on the geometric method and the state feedback control an observer is synthesized. The ball and plate system is used as a nonlinear, uncertain, and MIMO system to verify the effectiveness of the proposed controller.  The invasive weed optimization (IWO) method, which is one of the metaheuristic optimization algorithms, is used to obtain the optimal parameters of the proposed controller \cite{b4}. In \cite{b5} the authors discuss the use of PD position controller and PD angle controller to control the ball and plate system. Design and Implementation of a Ball-Plate Control System using computer vision as a feedback sensorand Python Script for Educational Purposes in STEM Technologies is proposed in \cite{b6}. In their paper, Mujadin et al. \cite{b7} developed the ball plate system control using a resistive touch screen as the sensor position of the ball.  Cheng et al. \cite{b8} present a skillful robotic wrist system using a visual servo control technique to demonstrate the dexterity of the mechanical wrist from the viewpoint of table tennis whereas the ball and plate system is chosen as the basic stage of this work. Dusek et al. \cite{b9} present the modeling of the ball and plate systems based on first principles which consider the balance of torques and forces.  Ibrahim Mustafa Mehedi et al. \cite{b10} presented fractional order controller design for the beam and ball system. \cite{b11} discusses an efficient method to improve the balancing and tracking of the trajectory of the BOPS based on machine learning (ML) algorithm with the Pseudo proportional-derivative (PPD) controller. 
+The ball and plate system is an extension of the Ball and Beam system \cite{b1}. It is considered a benchmark model of a driftless nonholonomic system. A state feedback controller using the pole assignment method was designed in \cite{b2} to maintain a desired position of the sphere over the plane. A computer vision technique allowed us to measure the two-dimensional position of the sphere over the plane in real-time. \cite{b3} considered the feedback delay in the control loop for determining the state-space model of the Ball-Plate System, and secondly, based on the geometric method and the state feedback control an observer is synthesized. The ball and plate system is used as a nonlinear, uncertain, and MIMO system to verify the effectiveness of the proposed controller.  The invasive weed optimization (IWO) method, which is one of the metaheuristic optimization algorithms, is used to obtain the optimal parameters of the proposed controller \cite{b4}. In \cite{b5} the authors discuss the use of PD position controller and PD angle controller to control the ball and plate system. Design and Implementation of a Ball-Plate Control System using computer vision as a feedback sensor and Python Script for Educational Purposes in STEM Technologies is proposed in \cite{b6}. In their paper, Mujadin et al. \cite{b7} developed the ball plate system control using a resistive touch screen as the sensor position of the ball.  Cheng et al. \cite{b8} present a skillful robotic wrist system using a visual servo control technique to demonstrate the dexterity of the mechanical wrist from the viewpoint of table tennis whereas the ball and plate system is chosen as the basic stage of this work. Dusek et al. \cite{b9} present the modeling of the ball and plate systems based on first principles which consider the balance of torques and forces.  Ibrahim Mustafa Mehedi et al. \cite{b10} presented fractional order controller design for the beam and ball system. \cite{b11} discusses an efficient method to improve the balancing and tracking of the trajectory of the BOPS based on machine learning (ML) algorithm with the Pseudo proportional-derivative (PPD) controller. 
 Various control methods are used to maintain the position of ball on plate such as, Fuzzy control \cite{b12}, PID\cite{b13}, SMC\cite{b14}, LQR\cite{b15}. We present the analysis and comparison of two such methods: PID and LQR.
 
-The  BPS is marginally stable since it contains a double pole in the origin. This results in the system having only non-decaying oscillatory components in its step response when introduced to a feedback loop. To gain stability and enhance the performance of the system a PID controller is introduced. Values of Kp, Ki, and Kd determine the control output that is required to attain a stable system response. Values of Kp, Ki and Kd are established through an iterative process in MATLAB.The Linear Quadratic Regulator (LQR) is a well-known method that provides optimally controlled feedback gains to enable the closed-loop stable and high-performance design of systems. 
+The  BPS is marginally stable since it contains a double pole in the origin. This results in the system having only non-decaying oscillatory components in its step response when introduced to a feedback loop. To gain stability and enhance the performance of the system a PID controller is introduced. Values of $K_p, K_i$ and $K_d$ determine the control output that is required to attain a stable system response and are established through an iterative process in MATLAB. The Linear Quadratic Regulator (LQR) is a well-known method that provides optimally controlled feedback gains to enable the closed-loop stable and high-performance design of systems. 
 
 Control theory and its applications are crucial when operating within the area of dynamic systems. The system should be able to recover and compensate for disturbances and external actions imposed on a given system being inherently unstable or semi-stable. Based on the simulation, a comparison of the given three strategies is also made based on their response to external disturbances. 
 
-This paper is organized as follows. Section [II] presents the modeling of ball plate system including the system description, mathematical model, state space vector description. Section [III] provides description of control methodologies used for both PID, LQR. Section [IV] presents the results of our simulation and discusses our observation for both methods. Section [V] shows how our work differs from amny other proposed schemes and finally Section [VI] concludes the paper.
+This paper is organized as follows. Section [II] presents the modeling of ball plate system including the system description, mathematical model and state space vector description. Section [III] provides description of control methodologies used for both PID and LQR. Section [IV] presents the results of our simulation and discusses our observation for both methods. Section [V] shows how our work differs from any other proposed schemes and finally, Section [VI] concludes the paper.
+
 
 
 
@@ -421,104 +424,176 @@ R = \begin{bmatrix}
 \normalsize
 
 \section{Results and Discussion}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTPID2.png}}
-\caption{Fixed Point Tracking using direct method}
-\label{fig4}
+
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{FPTPID2.png}
+         \caption{Trajectory Plot}
+         \label{FP PID2 trajectory plot}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{FPTEPID2.png}
+         \caption{Tracking position with time}
+         \label{FP PID2 position with time}
+     \end{subfigure}
+        \caption{Fixed point tracking using PID$-$direct approach}
+        \label{fig4PID2}
 \end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTEPID2.png}}
-\caption{Fixed Point Tracking using direct method}
-\label{fig5}
+\emph{1.(i). Fixed Point Tracking using PID $-$ Approach 1:} Fig. \ref{fig4PID2} depics the trajectory of the ball on the plate and its x and y coordinates with time. A small chattering is observed at steady state. These oscillations are of magnitude and order $5 \times 10^{-4}$ or $0.5mm$. The initial point is $(0.09,0.05)$m and final point is origin $(0,0)$. The settling time is near 5 seconds.
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{FPTPID.png}
+         \caption{Trajectory Plot}
+         \label{FP PID trajectory plot}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{FPTEPID.png}
+         \caption{Tracking position with time}
+         \label{FP PID position with time}
+     \end{subfigure}
+        \caption{Fixed point tracking using PID$-$trajectory approach}
+        \label{fig5 PID}
 \end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTPID.png}}
-\caption{Tracking Fixed Point as trajectory}
-\label{fig6}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTEPID.png}}
-\caption{Tracking Fixed Point as trajectory}
-\label{fig7}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRFPTPID.png}}
-\caption{Disturbance Rejection while tracking fix-point using PID}
-\label{fig8}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRFPTEPID.png}}
-\caption{Disturbance Rejection while tracking fix-point using PID}
-\label{fig9}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{CTPID.png}}
-\caption{Circular trajectory tracking using PID}
-\label{fig10}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRCTPID.png}}
-\caption{Disturbance Rejection while circular trajectory tracking using PID}
-\label{fig11}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{FPTLQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRFPTLQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRFPTELQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRFPPALQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRFPMTLQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{CTLQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRCTLQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRCTELQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRCPALQR.png}}
-\caption{}
-\label{fig}
-\end{figure}
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=0.4\textwidth]{DRCMTLQR.png}}
-\caption{}
-\label{fig}
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{DRFPTPID.png}
+         \caption{Trajectory Plot}
+         \label{DR FP PID trajectory plot}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{DRFPTEPID.png}
+         \caption{Tracking position with time}
+         \label{DR FP PID position with time}
+     \end{subfigure}
+        \caption{Disturbance Rejection while tracking fix-point using PID}
+        \label{fig6 Disturbance PID}
 \end{figure}
 
+\emph{1.(ii). Fixed Point Tracking using PID $-$ Approach 2:} Here, the desired trajectory is a straight line leading to the final point origin $(0,0)$ from initial point $(0.09,0.05)$. As shown in Fig. \ref{fig5 PID}, The ball traces  the straight line path accurately with negligible error of magnitude and order $4 \times 10^{-5}$ or $0.04mm$. Small chattering is also observed on the fixed point of order $\sim10^{-4}$. Disturbance rejecton is depicted in Fig. \ref{fig6 Disturbance PID}. A disturbance in the control  input causes the ball to leave its trajectory, which is corrected by controller.
+
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{CTPID.png}
+         \caption{Trajectory Plot $-$ without any disturbance}
+         \label{Circular PID trajectory plot}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{DRCTPID.png}
+         \caption{Trajectory plot $-$ with disturbance}
+         \label{DR Circular Trajectory PLot PID}
+     \end{subfigure}
+        \caption{Circular Trajectory tracking using PID}
+        \label{fig7 circular PID}
+\end{figure}
+\emph{1.(iii). Circular Trajectory Tracking using PID:} Fig.\ref{Circular PID trajectory plot} demonstrates the path taken by the ball in order to trace a circle of radius $0.4m$. There is an almost constant error of magnitude and order $2.5 \times 10^{-4}$ or $0.25mm$. Fig. \ref{DR Circular Trajectory PLot PID} represents the path of the ball when its disturbed from its path.
+
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{FPTLQR.png}
+         \caption{Trajectory Plot $-$ Fixed Point tracking}
+         \label{FP LQR trajectory plot}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{CTLQR.png}
+         \caption{Trajectory plot $-$Circular Trajectory tracking}
+         \label{Circular Trajectory Plot LQR}
+     \end{subfigure}
+        \caption{Controlling system using LQR}
+        \label{fig8 No disturbance both LQR}
+\end{figure}
+\emph{2.(i). Fixed Point tracking using LQR: }The ball takes a straight line path from the initial point $(0.09,0.04)m$ to the final point $(0,0)$, Fig. \ref{FP LQR trajectory plot}. An overshoot of magnitude $2.5 \times 10^{-3}m$ or $0.25cm$ is observed. The settling time is about 2 seconds. A constant steady state error of order $10^{-5}m$ is obtained. When disturbed slightly, the system stabilizes again as shown in Fig. \ref{DR FP LQR PA}. Motor torques have been limited by keeping the system less agressive, as is interpretable from the response time.
+
+\begin{figure}[h!]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{DRFPTLQR.png}
+         \caption{Trajectory Plot}
+         \label{DR FP LQR}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{DRFPTELQR.png}
+         \caption{x-position with time}
+         \label{DR TE FP LQR}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{DRFPPALQR.png}
+         \caption{Plate Angles vs time}
+         \label{DR FP LQR PA}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{DRFPMTLQR.png}
+         \caption{Motor Torques vs time}
+         \label{DR MT FP LQR}
+     \end{subfigure}
+        \caption{Disturbance Rejection while tracking fixed point using LQR}
+        \label{fig9 Disturbance Rejection LQR}
+\end{figure}
+\begin{figure}[h!]
+     \centering
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{DRCTLQR.png}
+         \caption{Trajectory Plot}
+         \label{DR Circ LQR}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{DRCTELQR.png}
+         \caption{Position with time}
+         \label{DR TE Circ LQR}
+     \end{subfigure}
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth, height=\textwidth]{DRCPALQR.png}
+         \caption{Plate Angles vs time}
+         \label{DR Circ LQR PA}
+     \end{subfigure}
+ %    \hfill
+     \begin{subfigure}[b]{0.24\textwidth}
+         \centering
+         \includegraphics[width=\textwidth,height=\textwidth]{DRCMTLQR.png}
+         \caption{Motor Torques vs time}
+         \label{DR MT Circ LQR}
+     \end{subfigure}
+        \caption{Disturbance Rejection while tracking circular trajectory using LQR}
+        \label{fig10 Disturbance Rejection Circ LQR}
+\end{figure}
+\emph{2.(i). Circular Trajectory tracking using LQR: } Fig. \ref{Circular Trajectory Plot LQR} shows the trajectory plot of the ball following a circular trajectory of 0.04m. There is a constant error of order $10^{-4}m$ or $0.1mm$. Fig.\ref{fig10 Disturbance Rejection Circ LQR} illustrates the path of the ball when a random disturbance derails the ball from its desired trajectory. The ball quickly recovers and starts tracing the circle again. As this motion requires aggressive control of the ball, Plate angles and Motor torques show impulsive behaviour (Fig.\ref{DR Circ LQR PA} and \ref{DR MT Circ LQR}).
 
 \section{Novelty in work}
+This paper focuses on simple and widely popular techniques to robustly control a seemingly-complex system. Emphasis has been laid on accurately modeling the system using two separate approaches. Comparisons have been made not only between different methods of control, but also, different methods of modeling. Errors have been reduced to almost zero to obtain near-idle response of the system.
 
 \section{Conclusion and Future Work}
-The control algorithms for PID and LQR were succesfully implemented for fixed and trajectory tracking. The simulation results showed that the ball would follow proper trajectory with a very small error in each case. However, based on the settling time and better response we can say that LQR performed better than PID for some parts. 
+The control algorithms for PID and LQR were succesfully implemented for fixed point and trajectory tracking. The simulation results are promising and demonstrate that the ball would follow proper trajectory with minute errors in each case. However, based on the settling time, steady state error and oscillations in the response, its conclusive that LQR control performed better than PID control.
 
-In our future works, we would try to improve the response of the system more. After the simulation of these two methods successfully, we would work on the analysis of a few more control methods like SMC, Fuzzy Control. We would also try to incorporate approaches like Machine Learning to improve the response of the system. Then we'll implement the ball plate system in hardware and observe the performance for each method. We would also like to propose for our future work trajectory planning and tracking problem of ball and plate system where the ball reaches from one point on the plate to another point based on a set trajectory and avoiding hurdles in it's path. 
+In the future, we aim to improve the response of the system. SMC, Fuzzy Control and techniques like Back-stepping, twisting and super-twisting can be employed. The use of Machine Learning algorithms to improve the response of the system can be analyzed. Further, Implementing the control on hardware system and observing the performance for each method will be carried out. The performance can also be judged on the application of avoiding hurdles while following a set trajectory.
 \begin{thebibliography}{00}
 \bibitem{b1} Hadipour, Mojtaba and Hosseinzadeh, Ali and Sadidi, Mohsen. (2021). Investigation of the Stability of the Ball and Beam by the PID Controller. Journal of Manufacturing Technology Management. 51-58.
 \bibitem{b2} Núñez, Acosta and Jiménez: Control of a ball-and-plate system using a State-feedback controller
